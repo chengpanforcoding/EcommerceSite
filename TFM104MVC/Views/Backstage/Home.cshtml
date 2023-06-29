@@ -1,0 +1,276 @@
+﻿@{
+    ViewData["Title"] = "後台總覽儀錶板";
+}
+
+<link rel="stylesheet" href="/css/BackHome.css" type="text/css">
+
+<!-- 右側本體內容-->
+<!--麵包屑-->
+<div class="breadcrumb d-flex align-items-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="">後台面板</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">總覽</li>
+        </ol>
+    </nav>
+</div>
+<div class="container-fluid g-3" id="backstageOrderVue">
+    <!--標題-->
+    <div class="row">
+        <p class="fs-3 fw-bold" style="color: #3c5587;">
+            總覽
+        </p>
+        <hr class="text-muted">
+    </div>
+    <!--EC訂單總覽-->
+    <div class="ec-order mt-3">
+        <!--標題-->
+        <div class="order-title">
+            <p class="fs-4 fw-bold" style="color: #3c5587;">
+                EC訂單
+            </p>
+        </div>
+        <!--訂單數量呈現-->
+        <div class="container-fluid">
+            <!--訂單筆數-->
+            <div class="row gap-3">
+                <!--今天 金額/訂單數-->
+                <div class="col infobox">
+                    <div class="infobox-icon mb-3">
+                        <span class="badge bg-danger">今天</span>
+                    </div>
+                    <div class="infobox-data">
+                        <span class="infobox-data-number">
+                            <small class="fw-bold" style="font-size: 13px;">
+                                NT$
+                            </small>
+                            {{todayOrdersList.price}}
+                        </span>
+                        <span class="infobox-text">
+                            /
+                        </span>
+                        <span class="infobox-text">
+                            {{todayOrdersList.count}}筆訂單
+                        </span>
+                    </div>
+                </div>
+                <!--昨天 金額/訂單數-->
+                <div class="col infobox">
+                    <div class="infobox-icon mb-3">
+                        <span class="badge bg-secondary">昨天</span>
+                    </div>
+                    <div class="infobox-data">
+                        <span class="infobox-data-number">
+                            <small class="fw-bold" style="font-size: 13px;">
+                                NT$
+                            </small>
+                            {{yesterdayOrdersList.price}}
+                        </span>
+                        <span class="infobox-text">
+                            /
+                        </span>
+                        <span class="infobox-text">
+                            {{yesterdayOrdersList.count}}筆訂單
+                        </span>
+                    </div>
+                </div>
+                <!--上週 金額/訂單數-->
+                <div class="col infobox">
+                    <div class="infobox-icon mb-3">
+                        <span class="badge bg-secondary">上週</span>
+                    </div>
+                    <div class="infobox-data">
+                        <span class="infobox-data-number">
+                            <small class="fw-bold" style="font-size: 13px;">
+                                NT$
+                            </small>
+                            {{lastWeekOrdersList.price}}
+                        </span>
+                        <span class="infobox-text">
+                            /
+                        </span>
+                        <span class="infobox-text">
+                            {{lastWeekOrdersList.count}}筆訂單
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--總量-->
+            <div class="row gap-3 mt-3">
+                <div class="col infobox-block infobox-green">
+                    <div class="infobox-amount">
+                        {{cancelOrderTotal}}
+                    </div>
+                    <div class="infobox-content">
+                        取消訂單總數
+                    </div>
+                </div>
+                <div class="col infobox-block infobox-blue">
+                    <div class="infobox-amount">
+                        {{totalOrder}}
+                    </div>
+                    <div class="infobox-content">
+                        訂單總量
+                    </div>
+                </div>
+                <div class="col infobox-block infobox-blue2">
+                    <div class="infobox-amount">
+                        {{totalProduct}}
+                    </div>
+                    <div class="infobox-content">
+                        總商品數
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--最近訂單-->
+    <div class="row mt-5">
+        <!--標題-->
+        <div class="order-title">
+            <p class="fs-4 fw-bold" style="color: #3c5587;">
+                最近訂單
+            </p>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">編號</th>
+                    <th scope="col">總價</th>
+                    <th scope="col">時間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in lastOrderList.slice(0,10)">
+                    <th scope="row">
+                        <a v-bind:href=" '/Backstage/order/'+ item.id ">
+                            #{{item.id}}
+                        </a>
+                    </th>
+                    <td>{{totalPrice(index)}}</td>
+                    <td>{{item.date}}</td>
+                </tr>
+                @*<tr>
+                    <th scope="row">
+                        <a href="">
+                            #2
+                        </a>
+                    </th>
+                    <td>14060.0</td>
+                    <td>4月14日 08:53</td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <a href="">
+                            #3
+                        </a>
+                    </th>
+                    <td>4999.0</td>
+                    <td>4月14日 11:07</td>
+                </tr>*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    var timeStamp = new Date(new Date().setHours(0, 0, 0, 0));
+    var oneDayAgo = timeStamp - 86400 * 1;
+    var appBackStageOrderVue = new Vue({
+        el: "#backstageOrderVue",
+        data: {
+            lastOrderList: [],
+            productList: [],
+            todayOrdersList: [],
+            yesterdayOrdersList: [],
+            lastWeekOrdersList:[]
+        },
+        mounted: function () {
+            this.getLastOrder();
+            this.getProductList();
+            this.todayOrders();
+            this.yesterdayOrders();
+            this.lastWeekOrders();
+        },
+        computed: {
+            totalOrder: function () {
+                return this.lastOrderList.length;
+            },
+            totalProduct: function () {
+                return this.productList.length;
+            },
+            cancelOrderTotal: function () {
+                //var orderList = this.lastOrderList.filter(item => item.orderStatus == "Canceled" && Date.parse(Date(item.date)) >= oneDayAgo);
+                var orderList = this.lastOrderList.filter(item => item.orderStatus == "Canceled");
+                var orderListTotal = orderList.length;
+                return orderListTotal;
+            },
+
+        },
+        methods: {
+            getLastOrder: function () {
+                let self = this;
+                axios.get("/api/orders/manage")
+                    .then(function (res) {
+                        self.lastOrderList = res.data;
+                    })
+            },
+            getProductList: function () {
+                let self = this;
+                axios.get("/api/products")
+                    .then(function (res) {
+                        self.productList = res.data;
+                    })
+            },
+            totalPrice: function (a) {
+                //先把每筆訂單的訂單明細取出來
+                var x = this.lastOrderList[a].orderdetails;
+                //計算每筆訂單內所有訂單明細的總金額
+                var item = x.map(x => x.unitPrice * x.discountPersent * x.quantity).reduce((now, next) => now + next, 0);
+                return item;
+            },
+            todayOrders: function () {
+                let self = this;
+                axios.get("/api/Orders/getTodayOrderTotalPriceAndCount")
+                    .then(
+                        function (res) {
+                            self.todayOrdersList = res.data;
+                        }
+                    ).catch(
+                        function (err) {
+                            alertWrong(err.data);
+                        }
+                    );
+            },
+            yesterdayOrders: function () {
+                let self = this;
+                axios.get("/api/Orders/getYesterdayOrderTotalPriceAndCount")
+                    .then(
+                        function (res) {
+                            self.yesterdayOrdersList = res.data;
+                        }
+                    ).catch(
+                        function (err) {
+                            alertWrong(err.data);
+                        }
+                    );
+            },
+            lastWeekOrders: function () {
+                let self = this;
+                axios.get("/api/Orders/getLastWeekOrderTotalPriceAndCount")
+                    .then(
+                        function (res) {
+                            self.lastWeekOrdersList = res.data;
+                        }
+                    ).catch(
+                        function (err) {
+                            alertWrong(err.data);
+                        }
+                    );
+            }
+        }
+    })
+
+</script>

@@ -1,0 +1,47 @@
+
+/*麵包屑的樣式修改*/
+.breadcrumb {
+    background-color: transparent;
+    color: #3c4554;
+}
+
+    .breadcrumb a {
+        color: #3c4554;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        .breadcrumb a:hover {
+            color: #5b7ce3;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+/*商品編輯icon群組的樣式修改*/
+.icon-btn-group a{
+    text-decoration: none;
+
+}
+
+/*商品編輯本體*/
+.product-edit-body{
+    padding: 20px;
+    border: 1px solid #ebeff7;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 30%);
+    background-color: #fff;
+    color: #2b303a;
+    font-weight: initial;
+}
+
+/*商品圖片編輯*/
+.photo-edit-icons{
+    /* position: absolute; */
+    left: 5px;
+    top: 5px;
+    cursor: all-scroll;
+}
+
+.bi-arrows-move{
+    color: #5b7ce3;
+}

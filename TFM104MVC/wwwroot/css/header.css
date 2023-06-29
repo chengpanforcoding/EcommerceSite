@@ -1,0 +1,104 @@
+html,
+body {
+    font-family: "Lato", "Noto Sans TC", sans-serif;
+    /* outline: 3px solid tomato; */
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: .5px;
+    padding: 0;
+    color: #333333;
+    /* background-color: #f6f7f8; */
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+    /* box-sizing: border-box; */
+}
+
+body {
+    padding-top: 70px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-primary.active, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:focus, .btn-primary:hover, .open .dropdown-toggle.btn-primary, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+        color: #fff;
+        background-color: #22a7aa;
+        border-color: #22a7aa;
+    }
+
+
+.btn-outline-success, .btn-outline-primary {
+    color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-outline-success:hover, .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #26bec9;
+        border-color: #26bec9;
+    }
+/* .navbar-collapse{
+    outline: 3px solid tomato;
+
+}
+
+.navbar-nav{
+    outline: 3px solid tomato;
+
+}*/
+.nav-item {
+    margin-left: 1rem;
+    align-items: center;
+    /* outline: 3px solid tomato; */
+}
+
+.shop-cart {
+    /* margin-top: 5px;*/
+    width: 20px;
+    height: 20px;
+}
+
+.login-provider-button-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 3px;
+    padding: 10px;
+    /* border: none; */
+}
+
+.shoppingCart {
+    width: 50%;
+}
+
+/*navUser連結設定*/
+
+.navUser a, .navUser a:hover {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+.product-list-click a, .product-list-click a:hover {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+/*    text-align: center;
+*/}
+
+.list-group-item p {
+    padding: 0;
+    margin: 0;
+}
+
+
+.product-list-click {
+    padding-top:0.8rem;
+}

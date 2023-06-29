@@ -1,0 +1,231 @@
+﻿@{
+    ViewData["Title"] = "廠商平台管理中心";
+}
+
+<link rel="stylesheet" href="/css/BackAdmin.css" type="text/css">
+
+<!-- 右側本體內容-->
+<!--麵包屑-->
+<div class="breadcrumb d-flex align-items-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a onclick="location.href='@Url.Action("Home", "Backstage")'">後台面板</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">總覽</li>
+        </ol>
+    </nav>
+</div>
+<div class="container-fluid g-3" id="EditAdmin">
+    <!--個人聯絡資訊-->
+    <div class="row">
+        <p class="fs-3 fw-bold" style="color: #3c5587;">
+            個人聯絡資訊
+        </p>
+        <!--帳號信箱-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="emailFormControlInput" class="form-label">帳號信箱</label>
+            </div>
+            <div>
+                <input type="email" class="form-control" id="emailFormControlInput"
+                       placeholder="name@example.com" v-model="adminData.account" readonly>
+            </div>
+        </div>
+        <!--使用者姓-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="LastNameFormControlInput" class="form-label">使用者姓</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" id="LastNameFormControlInput"
+                       placeholder="使用者姓" v-model="adminData.lastName">
+            </div>
+        </div>
+        <!--使用者名-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="FirstNameFormControlInput" class="form-label">使用者名</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" id="FirstNameFormControlInput"
+                       placeholder="使用者名" v-model="adminData.firstName">
+            </div>
+        </div>
+        <div class="mb-3" style="margin-left: 5rem;">
+            <button v-on:click="updateAdmin" class="btn btn-primary">儲存設定</button>
+        </div>
+        <hr class="text-muted">
+    </div>
+    <!--修改密碼-->
+    <div class="row">
+        <p class="fs-3 fw-bold" style="color: #3c5587;">
+            修改密碼
+        </p>
+        <!--當前密碼-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="NowPWFormControlInput" class="form-label">當前密碼　</label>
+            </div>
+            <div>
+                <input type="password" class="form-control" id="NowPWFormControlInput"
+                       placeholder="當前密碼" v-model="passwordNow" v-on:change="confirmPassword">
+            </div>
+        </div>
+        <!--新密碼-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="NewPWFormControlInput" class="form-label">新密碼　　</label>
+            </div>
+            <div>
+                <input type="password" class="form-control" id="NewPWFormControlInput"
+                       placeholder="新密碼" v-model="passwordNew">
+            </div>
+        </div>
+        <!--確認新密碼-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="ConfirmNewPWFormControlInput" class="form-label">確認新密碼</label>
+            </div>
+            <div>
+                <input type="password" class="form-control" id="ConfirmNewPWFormControlInput"
+                      v-on:change="comparePassword" placeholder="確認新密碼" v-model="passwordNewConfirm">
+            </div>
+        </div>
+        <div class="mb-3" style="margin-left: 6rem;">
+            <button v-on:click="updatePassword" class="btn btn-primary">儲存設定</button>
+        </div>
+        <hr class="text-muted">
+    </div>
+    <!--公司聯絡資訊-->
+    <div class="row">
+        <p class="fs-3 fw-bold" style="color: #3c5587;">
+            公司聯絡資訊
+        </p>
+        <!--公司名稱-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="CPNameFormControlInput" class="form-label">公司名稱</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" id="CPNameFormControlInput" placeholder="公司名稱"
+                       v-model="adminData.firms.name">
+            </div>
+        </div>
+        <!--統一編號-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="BANFormControlInput" class="form-label">統一編號</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" id="BANFormControlInput" placeholder="統一編號"
+                       v-model="adminData.firms.taxId">
+            </div>
+        </div>
+        <!--公司電話-->
+        <div class="mb-3 d-flex align-content-center gap-3">
+            <div class="d-flex align-items-center">
+                <label for="CPNFormControlInput" class="form-label">公司電話</label>
+            </div>
+            <div>
+                <input type="tel" class="form-control" id="CPNFormControlInput" placeholder="公司電話"
+                       v-model="adminData.phone">
+            </div>
+        </div>
+        <div class="mb-3" style="margin-left: 5rem;">
+            <a v-on:click="updateAdmin" class="btn btn-primary">儲存設定</a>
+        </div>
+        <hr class="text-muted">
+    </div>
+</div>
+
+<!--發修改&撈使用資料api-->
+<script>
+    var AppAdmin = new Vue({
+        el: '#EditAdmin',
+        data: {
+            adminData: {
+                account: "",
+                lastName: "",
+                firstName: "",
+                phone: "",
+                firms: {
+                    taxId: "",
+                    name: ""
+                }
+            },
+            passwordNow: "",
+            passwordNew: "",
+            passwordNewConfirm:""
+
+        },
+        mounted: function () {
+            this.getAdminData();
+        },
+        methods: {
+            updateAdmin: function () {
+                let self = this;
+                axios.post("/auth/UpdateFirmDetail", self.adminData)
+                    .then(
+                        function (res) {
+                            console.log("成功送出資料");
+                            alertSuccess("您已成功更新資料");
+                        }
+                    ).then(function () {
+                        self.getAdminData();
+                    }).catch(
+                        function (res) {
+                            console.log("送出資料失敗");
+                            alertWrong("資料送出失敗");
+                        }
+                    );
+            },
+            getAdminData: function () {
+                let self = this;
+                axios.get("/auth/getFirm").then(
+                    function (res) {
+                        console.log(res.data);
+                        self.adminData = res.data;
+                    }
+                )
+            },
+            confirmPassword: function () {
+                let self = this;
+                axios.post("/auth/ConfirmPassword?passwordNow=" + self.passwordNow)
+                    .then(function (res) {
+                        if (res.status == 204) {
+                            console.log("當前密碼輸入正確");
+                        }
+                    }).catch(function (err) {
+                        if (err.status == 404) {
+                            alertWrong("當前密碼輸入不正確");
+                        }
+                    })
+            },
+            updatePassword: function () {
+                let self = this;
+                axios.post("/auth/UpdateFirmPassword?passwordNew=" + self.passwordNew)
+                    .then(function (res) {
+                        if (res.status == 200) {
+                            alertSuccess("已成功更新密碼");
+                        }
+                    }).catch(function (err) {
+                        if (err.status == 404) {
+                            alertWrong("當前密碼輸入不正確");
+                        }
+                    })
+            },
+            comparePassword: function () {
+                let self = this;
+                if (self.passwordNewConfirm !== self.passwordNew) {
+                    alertWrong("兩者密碼輸入不相符");
+                    self.passwordNewConfirm = "";
+                    self.passwordNew = "";
+                } else {
+                    alertSuccess("兩者密碼相同");
+                }
+                
+            }
+        },
+    })
+</script>

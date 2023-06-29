@@ -1,0 +1,584 @@
+﻿@{
+    ViewData["Title"] = "廠商平台註冊頁";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - TFM104MVC-旅遊電商</title>
+
+    <!--bootstrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--bootstrap js bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <!--fontawesome-->
+    <!-- <script src="https://kit.fontawesome.com/c313a8a456.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384–5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <!--vue-->
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>*@
+    <!--vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!--axios-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.js' integrity='sha512-Kg0CewqPNO/ziOJuCq5eyl3P/V6OLz/Lb1I2m+yKS3lHZcGVFN/KOew18rWP+kTsL7haYdaqGjwHQCZrN0heLQ==' crossorigin='anonymous'></script>
+
+    <!--sweetAlert-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--我硬幹ㄉcss-->
+    <link rel="stylesheet" href="/css/BackLayout.css" type="text/css">
+    <link rel="stylesheet" href="/css/BackRegister.css" type="text/css">
+
+    <!--字體fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="ano nymous">
+</head>
+
+<body>
+
+    <!--導覽列-->
+    <header>
+        <div class="container">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <div style="margin-right: 3em;">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/pic/newest_logo.png" style="width:150px;"></a>
+                    </div>
+                    <div class="navbar-brand" style="">
+                        <a class="navbar-brand" asp-area="" asp-controller="Backstage" asp-action="Login" style="color:#26bec9;font-size:16px;">
+                            登入商家後台
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--公司基本資料-->
+    <div id="firmregister">
+        <div class="container section">
+            <div class="page-title">
+                @*<h2><strong>立即成為商家</strong></h2>*@
+                <span class="fs-3 fw-bold">立即成為商家</span>
+            </div>
+            <div class="board row">
+                <div class="col-md-12">
+                    <h3>公司基本資料</h3>
+                </div>
+                <div class="basic">
+                    <h7><strong>基本資料</strong></h7>
+                </div>
+                <div class="col-md-5">
+                    <div class="company-title">
+                        <label>
+                            法定公司名稱
+                            <p class="title-danger">*</p>
+                        </label>
+                        <input type="text" class="textbox" placeholder="請填寫您的公司全名，例如XX有限公司" v-model="firmregisterInformation.firms.name">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-id">
+                        <label>
+                            統一編號
+                            <p class="title-danger">*</p>
+                        </label>
+                        <input type="text" class="textbox" v-model="firmregisterInformation.firms.taxId">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-id">
+                        <label>
+                            公司電話
+                            <p class="title-danger">*</p>
+                        </label>
+                        <input type="text" class="textbox" v-model="firmregisterInformation.phone">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--主要聯絡人資料-->
+        <div class="container section">
+            <div class="page-title">
+            </div>
+            <div class="board row">
+                <div class="col-md-12">
+                    <h3>主要聯絡人資料</h3>
+                </div>
+                <div class="basic">
+                    <h7><strong>聯絡人資訊</strong></h7>
+                </div>
+                <div class="company-id">
+                    <label>
+                        主要聯絡人
+                        <p class="title-danger">*</p>
+                    </label>
+                    <div class="tbx_o">
+                        <div class="tbx col-sm-3">
+                            <input type="text" class="textbox" placeholder="姓" name="lastname" v-model="firmregisterInformation.lastName">
+                        </div>
+                        <div class="col-sm-2" style="margin-left: 20px;">
+                            <input type="text" class="textbox" placeholder="名" name="firstname" v-model="firmregisterInformation.firstName">
+                        </div>
+                    </div>
+                </div>
+                <div class="contain-email">
+                    <label>
+                        聯絡人電子信箱
+                        <p class="title-danger">*</p>
+                    </label>
+                    <div class="tbx_o">
+                        <div class="tbx col-sm-4">
+                            <input type="text" class="textbox" placeholder="請輸入常用電子信箱" name="email" v-model="firmregisterInformation.account">
+                        </div>
+                        <button v-on:click="checkEmail" type="button" class="btn btn-secondary btn-lg">驗證E-mail</button>
+                    </div>
+                </div>
+                <div class="contain-password">
+                    <label>
+                        密碼
+                        <span class="title-danger">*</span>
+                    </label>
+                    <div class="tbx col-sm-4">
+                        <input type="password" class="textbox" name="password" v-model="firmregisterInformation.password">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button id="applyBtn" class="btn btn-primary" type="submit" v-on:click="addRegister">送出申請</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--合作條款 暫時隱藏
+
+      <div class="container">
+        <div class="page-title">
+        </div>
+        <div class="board row">
+        <div class="col-md-12">
+        <h3>合作條款</h3>
+        </div>
+
+        <div>
+        <div class="form-group">
+        <label>閱讀後請點選同意並送出，即完成申請</label>
+        <div class="consent">
+        <h4 class="text-center">供應商合作條款</h4>
+        <p class="mt-15">日期：西元 2021 年 10 月 12 日<br>版本：第 2.0 版</p>
+        <div class="consent-area">
+        <h5>為確保貴公司的權益，請詳細閱讀本條款所載事項，當貴公司或授權代表人勾選畫面下方 「我已閱讀並同意以上合作條款」即表示貴公司已閱讀、瞭解並同意遵守本條款所載之規 範事項。</h5>
+        </div>
+
+        <div class="consent-area">
+        <h5>1.KKday的政策及條款</h5>
+        <ol>
+        <li>
+        本供應商合作條款（下稱「本條款」）是貴公司成為 KKday 供應商的規範基礎。本條款所指 稱的「KKday」可能會涵蓋 Kkday.com International
+        Company Limited
+        及其旗下所 有的關聯公司。
+        </li>
+        <li>
+        當貴公司使用「KKday 供應商註冊」網頁(<a href="https://scm.kkday.com/v1/zh-tw/auth/register"
+        target="_blank" class="link">https://scm.kkday.com/v1/zh-tw/auth/register</a>，下稱
+        「本註冊頁面」)提交註冊申請資料時，即表示閱讀、瞭解並同意受到本條款規範。如果貴公 司不接受本條款，即無法成為 KKday 的供應商。
+        </li>
+        <li>
+        除本條款特別約定的事項外，貴公司與 KKday 之間的關係受到「KKday-全球旅遊體驗平台」 (<a href="https://www.kkday.com"
+        target="_blank" class="link">www.kkday.com</a>)或 KKday 建置的其他平台（合稱「KKday
+        平台」）上公布的各種政策或
+        條款規範，包括但不限於：使用者條款、隱私權保護政策等。KKday 有權隨時修改或更新本 條款以及前述政策或條款，修改或更新之內容自公布於 KKday 平台上起生效，KKday
+        無須事
+        先通知貴公司。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>2.成為 KKday 的供應商</h5>
+        <ol>
+        <li>
+        貴公司應保證依本註冊頁面指示，所提交的各項「公司基本資料」及「主要聯絡人資料」資訊 均真實正確。當貴公司填寫所有本註冊頁面的必填欄位，並點擊「立即註冊」按鈕將資料提交 予
+        KKday 後，KKday
+        保有審核並決定貴公司是否能成為 KKday 供應商的最終決定權。
+        </li>
+        <li>
+        為期能與貴公司建立具信賴基礎的合作關係，並確保藉由 KKday 平台購買商品或服務的顧客 （下稱「顧客」）能於 KKday
+        平台上享有優質的商品或服務，當貴公司提交註冊申請資料予 KKday 後，KKday
+        有權要求貴公司提交其他成為 KKday 供應商的必備文件及資訊，包括但 不限於：公司設立登記表、公司變更登記表、政府核發的相關證照，以及與未來在 KKday
+        平台提供商品或服務一切相關的文件及資訊。若貴公司所提供之文件或資訊內容有變更之情事， 貴公司應於變更完成 10 日內以書面通知 KKday。
+        </li>
+        <li>
+        如貴公司未即時、或未按指定方式提交前二條之文件或資訊，或 KKday 嗣後發現貴公司所提 供之文件或資訊不正確或與事實不符、或未即時更新，KKday 得不予貴公司建立合作關係，
+        或得不通知貴公司即終止雙方合作關係。
+        </li>
+        <li>
+        貴公司同意 KKday 為處理本條款相關事宜與後續的供應商管理，得蒐集、處理及利用貴公司 或貴公司提供的相關人員的個人資料。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>3.商品或服務保證</h5>
+        <ol>
+        <li>
+        如果貴公司成為 KKday 的供應商，應對在 KKday 平台上提供的所有商品或服務提供下列保 證：
+        <ol type="A">
+        <li>貴公司提供給 KKday 銷售的商品或服務均在貴公司的經營範圍之內，貴公司及貴公司履行 輔助人均具備合法營業資格及專業技術。</li>
+        <li>貴公司保證該商品或服務的銷售遵守當地所有相關法令規範；</li>
+        <li>貴公司保證依民法、消費者保護法及 KKday 平台說明的各種交易條件及承諾，履行對 KKday 及顧客的商品或服務契約責任；</li>
+        <li>
+        貴公司保證提供顧客諮詢商品或服務問題的管道，如停止銷售該商品或服務後亦同。顧客 對貴公司提供商品或服務提出投訴時，貴公司應及時解決，並應積極配合 KKday
+        處理顧客
+        投訴等服務品質爭議，及時提供所需證據材料。
+        </li>
+        <li>貴公司保證將維持提供商品或服務之品質，不影響顧客之權益或造成顧客不適，並確保商 品或服務訂單、帳款之準確度。</li>
+        </ol>
+        </li>
+        <li>
+        KKday 將定期評鑑商品或服務標準，如評鑑結果優良，KKday 將依自身判斷提供貴公司回饋 方案，如有不良，KKday 得依第 13 條終止雙方合作關係。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>4.安全保障</h5>
+        <ol>
+        <li>
+        貴公司及貴公司履行輔助人在為 KKday 或顧客提供商品或服務前，應當就使用商品或服務時 應注意之安全事項、使用須知，以明示的方式事先向 KKday
+        及顧客說明或警示，不得有誇大
+        不實、虛偽隱匿或使人誤信之情事；貴公司應以保障 KKday 或顧客人身安全為優先，若判斷 對於 KKday
+        及顧客之人身及財產安全可能產生危害之虞時，貴公司應即刻停止提供該商品或 服務。
+        </li>
+        <li>
+        若有 KKday 或顧客因貴公司提供之商品或服務受到人身、財產損害，貴公司應立即採取救助 及因應措施，及時向 KKday 回饋資訊，蒐集和保存證據。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>5.價格調整</h5>
+        <ol>
+        <li>
+        貴公司如欲異動提供予 KKday 之產品售價或服務費用，須於 10 日前提供新售價或費用予 KKday，經 KKday 同意後進行調整。若貴公司未經 KKday
+        同意而逕行調整價格，則由貴公
+        司自行負擔因此產生之差價。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>6.第三方分銷</h5>
+        <ol>
+        <li>
+        為提升貴公司與 KKday
+        合作之商品或服務得有更廣大的銷售通路及市場能見度，貴公司同意由KKday透過第三方分銷貴公司所提供之商品或服務。第三方包含KKday平台以外之銷售通路、管道、或其他電子商務平台。
+        </li>
+        <li>
+        貴公司同意KKday得透過第三方就貴公司所提供之商品或服務進行銷售，KKday或第三方得自行挑選商品或服務之項目。貴公司同意KKday得依第三方之合理要求進行一切經營所必要之活動，KKday得在第三方之通路、管道或平台陳列、展示商品或服務之照片、圖像、影片、資訊及售價，KKday亦得不限區域再授權第三方在其通路、管道或平台陳列、展示商品或服務之照片、圖像、影片、資訊及售價，以達銷售之目的。
+        </li>
+        <li>
+        貴公司知悉如不同意商品或服務由第三方分銷，得書面通知KKday，KKday將協助關閉貴公司商品或服務於KKday平台之分銷功能，如未通知KKday，則視為貴公司同意第6.1及6.2條。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>7.保密義務</h5>
+        <ol>
+        <li>
+        就雙方間之合作，貴公司及 KKday 均承諾並保證其有義務不向第三人透露保密資訊，該保密 資訊指由一方向對方透露，與雙方合作有關的任何口頭或書面形式或其他形式的不公開信息，
+        包括但不限於商業計畫、客戶名單、技術資料、產品構思、開發計畫、職員名單、操作手冊、 財務情況和其他遞交時約定為保密資訊之資料（以下稱「保密資訊」）。
+        </li>
+        <li>
+        對於本條款中描述的保密資訊，貴公司、KKday 及其代理人、代表人、受僱人應遵守下列事 項：
+        <ol type="A">
+        <li>以不低於保護自己保密資訊的程度（至少以合理程度）予以保密。 </li>
+        <li>要求獲知保密資訊的人員對保密資訊予以保密。</li>
+        <li>在必要情況下，根據雙方書面商定的方式使用保密資訊。</li>
+        </ol>
+        </li>
+        <li>
+        以下資訊不適用本條保密義務約定：
+        <ol type="A">
+        <li>由公眾通過合法途徑獲知之資訊。</li>
+        <li>從第三方合法管道獲知之資訊。</li>
+        <li>為法律或有管轄權之政府部門根據法令所要求揭露之資訊。</li>
+        <li>根據法律程序而要求揭露之資訊。</li>
+        </ol>
+        </li>
+        <li>
+        本保密條款不因雙方合作期間屆滿或終止而失效。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>8.個人資料保護</h5>
+        <ol>
+        <li>
+        貴公司因履行雙方合作關係而自 KKday 或顧客蒐集、處理或利用個人資料，應符合個人資料 保護法令及其他相關法令，並受 KKday 之監督。
+        </li>
+        <li>
+        貴公司保有個人資料檔案，應指定人員辦理個資安全維護事項，且該人員應具有管理及維護個 人資料檔案之能力。貴公司應確實實施安全維護措施，嚴格管理資料安全，妥善保存使用紀錄、
+        軌跡資料及證據。
+        </li>
+        <li>
+        貴公司如將顧客相關個人資料提供予貴公司履行輔助人，貴公司應要求履行輔助人以前條相同 條件保管及維護，且貴公司應協助 KKday 監督履行輔助人。
+        </li>
+        <li>
+        倘貴公司或貴公司履行輔助人發現有違反本條規定或個人資料被竊取、洩漏、竄改等其他侵害 之情事導致違反個人資料保護相關法律或其他法規命令，或導致他人權益遭受損失之可能，皆
+        應即刻通知
+        KKday，並立即調查事故事實與影響範圍、提出控制與因應修復措施，必要時協 助 KKday 進行和解或訴訟程序。如由 KKday
+        發現者，應即時通知貴公司按前述約定辦理，KKday
+        並得要求貴公司更換可歸責承辦人員並限期改善；貴公司因可歸責之事由致未更換可 歸責承辦人員或逾期未改善者，KKday 得逕行終止雙方之合作關係。
+        </li>
+        <li>
+        貴公司同意配合 KKday 基於法令之要求實施定期或不定期稽查以監督貴公司或貴公司履行輔 助人保管及維護個人資料之狀況，並於 KKday 進行稽查時，負有提供 KKday
+        稽查所需相關 文件資料之義務。
+        </li>
+        <li>
+        雙方之合作關係終止時，貴公司應立即銷毀任何留存或蒐集的顧客個人資料，不得使用。但貴公司依法負有保存義務者，不在此限。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>9.智慧財產權</h5>
+        <ol>
+        <li>
+        貴公司及 KKday在雙方合作期間內，得基於雙方合作目的合理使用他方授權之企業名稱、商 標、商號、品牌、網域名稱和網站；任一方在其自身宣傳文案、名片、網站以及其他任何方面
+        使用對方授權之名稱和網站，須事先書面通知他方，並獲得他方之書面許可後方可進行。
+        </li>
+        <li>
+        貴公司同意授權 KKday 得於雙方合作期間內，在與雙方合作目的相關之範圍內，使用貴公司 所提供之所有照片、圖像、影片等著作於各類行銷商品或服務之展覽、文案、印刷品之製作等
+        宣傳，KKday
+        亦得因應前述目的，以重製、改作、編輯或以數位方式公開傳輸前述相片、圖 像、影片。前述貴公司授權與 KKday 之照片、圖像、影片資料之著作權仍屬於貴公司所有。
+        </li>
+        <li>
+        雙方合作關係因期間屆滿或提前終止後，KKday 如有後續使用貴公司著作之需要，雙方得另 行協議延長貴公司著作之授權期間並支付授權費用。
+        </li>
+        <li>
+        貴公司保證其所提供之語文、美術、攝影、圖形、視聽、錄音及電腦程式等著作，無侵害第三 人智慧財產權之情事，如 KKday 因使用貴公司提供之著作而遭第三人為任何請求（包含但不
+        限於第三人向 KKday
+        要求授權金，以及貴公司與該第三人之訴訟相關費用等），均由貴公司 負擔全部賠償責任。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>10.禁止賄賂條款</h5>
+        <ol>
+        <li>
+        貴公司及 KKday 任一方保證不向他方及與本合作有關的任何人員，直接或間接支付任何傭金、 報酬、回扣，或提供任何禮品或款待，亦不向他方及與本合作有關的任何人員就上述事項達成
+        任何安排，但依商業慣例贈送小額廣告禮品不在此限。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>11.不可抗力</h5>
+        <ol>
+        <li>
+        因戰爭、地震、山崩、海嘯、雷擊、水災、火災、政府行為、駭客攻擊、電信部門技術管制、重大傳染疾病等非雙方所能合理控制之不可抗力事由，致貴公司或 KKday 不能履行本合作，
+        應當及時通知他方，並在合理期限內提供證明，緊急情況下，雙方應採取合理適當措施防止損失擴大。並根據影響程度，部分或全部免除責任。但一方遲延履行後發生不可抗力事由者，該方不能免除責任。
+        </li>
+        <li>
+        因不可抗力之事由導致訂單無法完成或延遲，雙方應及時與顧客協商、調整訂單內容，由雙方 協商承擔所增加之費用。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>12.違約責任</h5>
+        <ol>
+        <li>
+        如貴公司有違反本條款情形，應賠償 KKday 因此所受之一切損害及支付的費用，包括但不限 於訴訟費、律師費、罰鍰、罰金、和解金。
+        </li>
+        <li>
+        如貴公司有違反本條款之任一聲明、保證、承諾或其他約定事項，致任何第三人提出索賠請求的情形，貴公司應確保 KKday 及 KKday 的負責人與員工不受到任何損失，並應配合提供必
+        要的說明、證據或為其他協助；如前開人等因此受有損害或支付相關費用，貴公司應負賠償之責。
+        </li>
+        <li>
+        除本條款另有約定外，在合作期間內，因可歸責一方之事由引起與顧客或第三人之爭議或法律 糾紛，可歸責之一方應負責解決並承擔一切責任。如由他方代為解決時，他方得向可歸責之一
+        方請求因此所生之費用。
+        </li>
+        <li>
+        本條所生之貴公司賠償金額，KKday 得逕自應給付予貴公司之款項扣抵，尚有不足者，貴公 司應於收受 KKday 書面通知日起十日內匯款至 KKday 指定帳戶。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>13.條款終止及其效果</h5>
+        <ol>
+        <li>
+        貴公司或 KKday 任一方有以下情形時，他方除有權終止雙方合作關係外，並得請求該方賠償 一切損失及返還合作中所支付之全部費用：
+        <ol type="A">
+        <li>任一方或其履行輔助人不具備合法經營資格； </li>
+        <li>可歸責於任一方之事由致他方受不利之行政裁罰； </li>
+        <li>貴公司對顧客為私下推銷攬客之行為，或與顧客私下交易； </li>
+        <li>任一方違反第 2.3 條、第3.2條、第 7 條、第 8 條、第 9 條及第 10 條之約定； </li>
+        <li>除前項各款約定外，因任一方違約行為造成他方或顧客損失，經限期改善，而該方拒不改 善或拒絕賠償。 </li>
+        </ol>
+        </li>
+        <li>
+        除前條及第 13.4 條所定情形外，雙方合作期間內貴公司或 KKday 擬終止雙方合作關係，應於
+        一個月前以書面向他方提出，經雙方協商並同意後辦理。若一方未經他方同意，擅自終止雙方
+        合作關係，則需賠償他方因此遭受之經濟及商譽損失，但依約定於期滿前通知他方不予續約者 不在此限。
+        </li>
+        <li>
+        雙方合作關係期間屆滿或提前終止後，在雙方合作關係有效期間內經雙方確認之訂單，除雙方 另行協議外，應當繼續履行。
+        </li>
+        <li>
+        如貴公司或 KKday 因破產、重整、解散、被進行清算、暫時或終止營業，或為債權人利益進 行轉讓等其他影響，他方得逕以書面終止雙方合作關係，且不需承擔任何賠償責任。
+        </li>
+        </ol>
+        </div>
+        <div class="consent-area">
+        <h5>14.其他</h5>
+        <ol>
+        <li>
+        未經 KKday 事前書面同意，貴公司不得轉讓雙方合作關係或任何基於本條款產生的權利與義 務予任何第三人。
+        </li>
+        <li>
+        如果貴公司對成為 KKday 供應商或雙方合作關係有任何疑問，請直接與 KKday 供應商註冊 中心（email: <a href="mailto:supplier-apply@kkday.com">supplier-apply@kkday.com</a>）聯絡，KKday
+        將儘速為您處理。
+        </li>
+        </ol>
+        </div>
+
+        <style type="text/css">
+        .consent {
+        counter-reset: main-item
+        }
+
+        .consent-area ol {
+        padding-left: 20px;
+        }
+
+        .consent-area > ol {
+        counter-increment: main-item;
+        counter-reset: sub-item
+        }
+
+        .consent-area > ol > li {
+        margin-left: 0;
+        display: table;
+        }
+
+        .consent-area > ol > li:before {
+        width: 35px;
+        text-align: center;
+        display: table-cell;
+        }
+        </style>
+        </div>
+        </div>
+        </div>
+        <div class="checkbox">
+        <label>
+        <input type="checkbox" value="18">
+        我已閱讀並同意以上合作條款
+        </label>
+        </div>
+        <div class="box-footer text-center">
+        <<button id="applyBtn" class="btn btn-primary">送出申請</button>
+        </div>
+        </div>
+        </div>-->
+</body>
+</html>
+
+<!--發註冊API-->
+<script>
+    var com = new Vue({
+        el: "#firmregister",
+        data: {
+            firmregisterInformation: {
+                account: "",
+                password: "",
+                lastName: "",
+                firstName: "",
+                phone: "",
+                roleName: "Firm",
+                firms: {
+                    name: "",
+                    taxId: ""
+                }
+            }
+        },
+        methods: {
+            addRegister: function () {
+                let self = this;
+                axios.post("/auth/register", self.firmregisterInformation)
+                    .then(
+                        function (res) {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: '恭喜註冊成功',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    willClose: (toast) => {
+                                        axios.post("/auth/login", self.firmregisterInformation).then(function (res) { window.location.href = "/backstage/home"; }).catch();
+                                    }
+                                });
+                                //alert("恭喜註冊成功，請再次登入，並至您的信箱接收帳號激活驗證信");
+                                //axios.post("/auth/login", self.firmregisterInformation).then(function (res) { window.location.href = "/backstage/home"; }).catch();
+                            };
+                        }
+                    )
+                    .catch(function (error) {
+                        if (error.status == 404) {
+                            alert(error.data);
+                        }
+                        if (error.status == 422) {
+                            for (var i of Object.keys(error.data.errors)) {
+                                alert(error.data.errors[i][0]);
+                            }
+                        }
+                    });
+            },
+            checkEmail: function () {
+                let self = this;
+                axios.post("/auth/checkAccount?account=" + self.firmregisterInformation.account)
+                    .then(function (res) {
+                        if (res.status == 200) {
+                            if (res.data == "帳號已存在") {
+                                alertWrong(res.data);
+                            }
+                            else {
+                                alertSuccess(res.data);
+                            }
+                        }
+                    });
+            }
+        }
+    });
+</script>
+
+
+<script>
+    function alertSuccess(inp) {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: inp,
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    }
+
+    function alertWrong(inp) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: inp,
+        })
+    }
+</script>

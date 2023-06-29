@@ -1,0 +1,131 @@
+html,
+body {
+  font-family: "Lato", "Noto Sans TC", sans-serif;
+  /* outline: 3px solid tomato; */
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: .5px;
+  padding: 0;
+  color: #333333;
+  background-color: #f2f6fc;
+  /* background-color: #f6f7f8; */
+  /* background-color: #f5f5f5; */
+  overflow-x: hidden;
+  /* box-sizing: border-box; */
+}
+
+body { padding-top: 70px; }
+
+/*覆蓋bootsrtap的樣式語法*/
+/* .nav-searchb-box{
+    margin-left: 3em;
+} */
+
+
+/*左側導覽列*/
+.left-nav{
+    background-color: #34425A;
+    height: 1500px;
+}
+
+.left-nav .list-group-item{
+    background-color: #34425A;
+    color: #fff;
+} 
+
+/* nav .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #ced4da;
+    background-color: gray;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+} */
+
+/*麵包屑*/
+.breadcrumb {
+    background-color: transparent;
+}
+
+/*按鈕設定*/
+.btn-outline-primary {
+    color: #5b7ce3;
+    border-color: #5b7ce3;
+}
+
+.btn-outline-primary:hover {
+        color: #fff;
+        background-color: #5b7ce3;
+        border-color: #5b7ce3;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #5b7ce3;
+    border-color: #5b7ce3;
+}
+
+.btn-primary.active, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:focus, .btn-primary:hover, .open .dropdown-toggle.btn-primary, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+        color: #fff;
+        background-color: #5b7ce3;
+}
+
+
+
+/*navUser連結設定*/
+
+.navUser a, .navUser  a:hover{
+        text-decoration: none;
+        color: #333;
+        cursor: pointer;
+        background-color: transparent;
+        transition: .25s;
+}
+
+.nav-item > a > .btn{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.list-group-item p{
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+    z-index: 1;
+    color: #495057;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.footer {
+    /*    position: absolute;
+    bottom: 0;*/
+/*    background-color: dimgray;
+*/    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    color: #fff;
+}
+
+    .footer a {
+        text-decoration: none;
+        /*        color: gray;
+*/
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+            /*            color: #FFF;
+*/
+        }

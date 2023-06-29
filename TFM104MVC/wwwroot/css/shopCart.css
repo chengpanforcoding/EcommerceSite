@@ -1,0 +1,152 @@
+/**/
+
+.container {
+    max-width: 800px;
+}
+
+/*--------------------*/
+
+/*覆蓋bootsrtap的樣式語法*/
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.btn-outline-success, .btn-outline-primary {
+    color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-outline-success:hover, .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #26bec9;
+        border-color: #26bec9;
+    }
+
+.btn-primary, .btn-info {
+    color: #fff;
+    background-color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-primary.active, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:focus, .btn-primary:hover, .open .dropdown-toggle.btn-primary, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+        color: #fff;
+        background-color: #22a7aa;
+        border-color: #22a7aa;
+    }
+
+    .btn-info.active, .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .btn-info:focus, .btn-info:hover, .open .dropdown-toggle.btn-info, .open > .dropdown-toggle.btn-info.focus, .open > .dropdown-toggle.btn-info:focus, .open > .dropdown-toggle.btn-info:hover {
+        color: #fff;
+        background-color: #22a7aa;
+        border-color: #22a7aa;
+    }
+
+
+.btn-blue {
+    background-color: #64b3f4;
+    color: #fff;
+}
+
+    .btn-blue:active, .btn-blue:focus, .btn-blue:hover {
+        background-color: #489add;
+        color: #fff;
+    }
+
+.continue-shop a, .continue-shop a:hover {
+    text-decoration: none;
+    color: #26bec9;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+/*    #continue-shop a, #continue-shop a:hover {
+        text-decoration: none;
+        color: #26bec9;
+        cursor: pointer;
+        background-color: transparent;
+        transition: .25s;
+    }*/
+
+.cart-group a, .cart-group a:hover {
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+/*.board-action a, .board-action a:hover {
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}*/
+
+
+/*--------------------*/
+
+
+/*改商品結帳的字*/
+.item > .align-items-center > .text-muted {
+    font-size: 6px;
+}
+
+
+/*a:hover {
+    text-decoration: underline;
+}
+*/
+/* .navbar-collapse{
+    outline: 3px solid tomato;
+
+}
+
+.navbar-nav{
+    outline: 3px solid tomato;
+
+}*/
+.nav-item {
+    margin-left: 1rem;
+    align-items: center;
+    /* outline: 3px solid tomato; */
+}
+
+
+
+.cart-recommend {
+    margin-top: 5%;
+}
+/*各看板設定*/
+.board {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+/*設定你可能會喜歡的商品區塊*/
+
+.product-card-image {
+    height: 150px;
+    background-color: #eaeaea;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 6px;
+    -webkit-transition: -webkit-transform .8s ease 0s,-webkit-transform .8s ease 0s;
+    transition: -webkit-transform .8s ease 0s,-webkit-transform .8s ease 0s;
+    transition: transform .8s ease 0s,transform .8s ease 0s;
+    transition: transform .8s ease 0s,transform .8s ease 0s,-webkit-transform .8s ease 0s,-webkit-transform .8s ease 0s;
+    z-index: 1;
+}
+
+.product-info {
+    font-size: 10px;
+}
+
+.row a {
+    text-decoration: none;
+}

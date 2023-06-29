@@ -1,0 +1,370 @@
+﻿@{
+    ViewData["Title"] = "後台商品列表";
+}
+<link rel="stylesheet" href="/css/BackProductList.css" type="text/css">
+
+<!--商品列表標題-->
+<div class="d-flex justify-content-between my-4">
+    <div class="" style="margin-left: 3rem;">
+        <span class="product-list-title fw-bold fs-3" style="color: #3c5587;">
+            所有商品
+        </span>
+    </div>
+    <div class="add-product" style="margin-right: 3rem;">
+        <button type="button" class="btn btn-outline-primary" onclick="location.href='@Url.Action("NewProduct", "Backstage")'">
+            <i class="bi bi-plus-circle-fill"></i> 新增商品
+        </button>
+    </div>
+</div>
+<!--商品列表本體-->
+<div class="product-list-body" style="margin-right: 3rem; margin-left: 3rem;" id="GetProducts">
+    <!-- 商品搜尋列 -->
+    <div class="product-list-search-bar d-flex gap-3">
+        <!-- 選擇上架狀態 -->
+        <div class="btn-group">
+            <select class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" v-model="productStatusValue" v-on:change="regionClick"
+                    aria-expanded="false">
+                <option value="" selected>選擇上架狀態</option>
+                <option value="Unapproved">未審核</option>
+                <option value="Launched">已上架</option>
+                <option value="NotSold">已下架</option>
+            </select>
+        </div>
+        <!-- 商品分類 -->
+        <div class="btn-group">
+            <select class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" v-model="TriptypeValue" v-on:change="regionClick">
+                <option value="" selected>商品分類</option>
+                <option value="Camping">露營</option>
+                <option value="WaterActivities">水上活動</option>
+                <option value="HistoryJourney">人文之旅</option>
+                <option value="LocalSpecialties">地方特色</option>
+                <option value="SpringTour">溫泉之旅</option>
+            </select>
+        </div>
+        <!-- 地區分類 -->
+        <div class="btn-group">
+            <select type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" v-model="regionValue" v-on:change="regionClick">
+                <option value="" selected>地區分類</option>
+                <option value="North">北北基</option>
+                <option value="MiddleNorth">桃竹苗</option>
+                <option value="Middle">中彰投</option>
+                <option value="MiddleSouth">雲嘉南</option>
+                <option value="South">高屏</option>
+                <option value="East">宜花東</option>
+                <option value="OutsideIsland">離島地區</option>
+            </select>
+
+        </div>
+        <!-- 請輸入商品名稱 -->
+        <div class="mb-3">
+            <input type="text" class="form-control" id="productInput" placeholder="請輸入商品名稱" v-model="searchKeyword">
+        </div>
+        <!-- 搜尋btn -->
+        <div class="float-end">
+            <button type="button" class="btn btn-primary" v-on:click="regionClick">
+                搜尋
+            </button>
+        </div>
+    </div>
+    <!-- 商品列表 -->
+    <div class="product-list-table">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <input class="d-block form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <span class="d-block">全選</span>
+                    </th>
+                    @*<th scope="col">商品編號</th>*@
+                    <th scope="col">商品圖</th>
+                    <th scope="col">品名</th>
+                    <th scope="col">單價</th>
+                    <th scope="col">上架狀態</th>
+                    <th scope="col">商品編輯&刪除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in productList">
+                    <th scope="row">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    </th>
+                    @*<td>{{item.id}}</td>*@
+                    <td>
+                        <img :src="item.productPictures[0].url" style="width:50px;">
+                    </td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.originalPrice }}</td>
+                    <td>{{item.productStatus}}</td>
+                    <td>
+                        <div class="d-flex gap-3">
+                            <!--編輯-->
+                            <a class="btn btn-success" v-bind:href=" '/Backstage/EditProduct/'+ item.id ">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <!--眼睛-->
+                            <button v-on:click="softDelete(item.id)" class="btn btn-warning">
+                                <i class="bi bi-eye-slash"></i>
+                            </button>
+                            <!--垃圾桶-->
+                            <div href="" class="btn btn-danger" v-on:click.prevent="del(item.id)">
+                                <i class="bi bi-trash3"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!--<tr>
+                    <th scope="row">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    </th>
+                    <td>idxxx</td>
+                    <td>
+                        <img src="https://fakeimg.pl/50/">
+                    </td>
+                    <td>綠島5天4夜</td>
+                    <td>99999</td>
+                    <td>已上架</td>
+                    <td>
+                        <div class="d-flex gap-3">-->
+                <!--編輯-->
+                <!--<a class="btn btn-success" href="">
+                    <i class="bi bi-pencil-square"></i>
+                </a>-->
+                <!--眼睛-->
+                <!--<a href="" class="btn btn-warning">
+                    <i class="bi bi-eye-slash"></i>
+                </a>-->
+                <!--垃圾桶-->
+                <!--<a href="" class="btn btn-danger">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    </th>
+                    <td>idxxx</td>
+                    <td>
+                        <img src="https://fakeimg.pl/50/">
+                    </td>
+                    <td>綠島5天4夜</td>
+                    <td>99999</td>
+                    <td>已上架</td>
+                    <td>
+                        <div class="d-flex gap-3">-->
+                <!--編輯-->
+                <!--<a class="btn btn-success" href="">
+                    <i class="bi bi-pencil-square"></i>
+                </a>-->
+                <!--眼睛-->
+                <!--<a href="" class="btn btn-warning">
+                    <i class="bi bi-eye-slash"></i>
+                </a>-->
+                <!--垃圾桶-->
+                <!--<a href="" class="btn btn-danger">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    var keyword = window.location.search.replace("?", "");
+    var keywordDecode = decodeURI(window.location.search.replace("?keyword=", ""));
+
+    var backstageProductList = new Vue({
+        el: '#GetProducts',
+
+        data: {
+            productList: [],
+            error: "",
+            regionValue: "", // 開[]為多選   ""為單選
+            TraveldaysValue: "",
+            TriptypeValue: "",
+            productTotal: '',
+            orderbyClick: '',
+            customerRating: '',
+            goTraveltime: "",
+            pageLeftBtn: true,
+            productStatusValue: "",
+            countOfPage: 10,// 幾個一頁
+            currPage: 1,//初始頁
+            sectionObject: {
+                "North": "北北基",
+                "MiddleNorth": "桃竹苗",
+                "Middle": "中彰投",
+                "MiddleSouth": "雲嘉南",
+                "South": "高屏",
+                "East": "宜花東",
+                "OutsideIsland": "離島地區"
+            },
+            sectionProductStatusObject: {
+                "Unapproved": "未審核",
+                "Launched": "已上架",
+                "NotSold": "已下架"
+            },
+            chRegion: "",
+            tempDeleteItem: "",
+            searchKeyword: ""
+        },
+        computed: {
+            pageStart: function () {
+                return (this.currPage - 1) * this.countOfPage;
+            },
+            totalPage: function () {
+                return Math.ceil(this.productList.length / this.countOfPage);
+            },
+
+        },
+
+        mounted: function () {
+            var self = this;
+
+            axios.get("/api/products?" + keyword + "&orderby=createdate").then(function (res) {
+                for (let i of res.data) {
+                    i.region = self.sectionObject[i.region];
+                    i.productStatus = self.sectionProductStatusObject[i.productStatus];
+                    //    i.goTouristTime = "" +i.goTouristTime;
+                }
+                self.productList = res.data;
+                self.productTotal = res.data.length;
+                //    self.chRegion = app1.sectionObject[res.data.region];
+            }).catch(function (error) {
+                self.error = error.data;
+                self.productList = "";
+                self.productTotal = "0";
+            })
+        },
+
+        methods: {
+            regionClick: function () {
+                var self = this;
+                var regionValue = self.regionValue;
+                //var Traveldays = self.TraveldaysValue;
+                var Triptype = self.TriptypeValue;
+                var ProductStatus = self.productStatusValue;
+                var Keyword = self.searchKeyword;
+                //var orderbyClick = self.orderbyClick;
+                //var customerRating = self.customerRating;
+                //var goTraveltime = self.goTraveltime;
+                //if (goTraveltime != "") { goTraveltime = decodeURI(goTraveltime.replace("T", "+").concat(":00.0000000")); }
+
+                axios.get("/api/products?Region=" + regionValue + "&Triptype=" + Triptype + "&ProductStatus=" + ProductStatus + "&Keyword=" + Keyword).then(function (res) {
+                    for (let i of res.data) {
+                        i.region = self.sectionObject[i.region];
+                        i.productStatus = self.sectionProductStatusObject[i.productStatus];
+                    };
+                    self.productList = res.data;
+                    //self.error = "";
+                    //self.currPage = "1";
+                    //self.productTotal = res.data.length;
+
+                }).catch(function (error) {
+                    //self.error = error.data;
+                    //self.productList = "";
+                    //self.productTotal = "0";
+                    alertWrong(error.data);
+                })
+
+                // }
+            },
+            setPage: function (idx) {//設定頁面
+                if (idx <= 0 || idx > this.totalPage) {
+                    return;
+                }
+                this.currPage = idx;
+            },
+            del: function (id) {
+                axios.delete("/api/products/" + id).then(
+                    function (res) {
+                        if (res.status == 204) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: "您已成功刪除商品",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    }
+                ).catch(
+                    function (err) {
+                        alertWrong(err.data);
+                    }
+                )
+
+            },
+            softDelete: function (productId) {
+                var url = "/api/products/" + productId + "/soft";
+                axios.post(url)
+                    .then(function (res) {
+                        if (res.status == 200) {
+                            //alertSuccess(res.data);
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: res.data,
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    }).catch(function (err) {
+                        if (err.status == 404) {
+                            alertWrong(err.data);
+                        }
+                    });
+            },
+        },
+        filters: {
+            ellipsis(value) {
+                if (!value) return '';
+                if (value.length > 50) {
+                    return value.slice(0, 50) + '...'//第幾個字加...
+                }
+                return value
+            }
+        },
+
+
+    });
+
+</script>
+
+<!--checkbox全選-->
+<script>
+    //點選全選，子複選框被選中
+    function demo() {
+        var allcheck = document.getElementById("flexCheckChecked");
+        var choice = document.getElementsByName("choice");
+        for (var i = 0; i < choice.length; i++) {
+            choice[i].checked = allcheck.checked;
+        }
+    }
+
+    //點選子複選框,全選框 選中、取消
+    function setAll() {
+        if (!$(".form-check-input").checked) {
+            $("#flexCheckChecked").prop("checked", false); // 子複選框某個不選擇，全選也被取消
+        }
+        var choicelength = $("input[type='checkbox'][class='form-check-input']").length;
+        var choiceselect = $("input[type='checkbox'][class='form-check-input']:checked").length;
+
+        if (choicelength == choiceselect) {
+            $("#flexCheckChecked").prop("checked", true);   // 子複選框全部部被選擇，全選也被選擇；1.對於HTML元素我們自己自定義的DOM屬性，在處理時，使用attr方法；2.對於HTML元素本身就帶有的固有屬性，在處理時，使用prop方法。
+        }
+
+    }
+
+</script>

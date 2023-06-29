@@ -1,0 +1,107 @@
+/*訂單管理列表背景設定*/
+table {
+    padding: 20px;
+    border: 1px solid #ebeff7;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 30%);
+    background-color: #fff;
+    color: #2b303a;
+    font-weight: initial;
+    /* width: 500px;
+    height: 400px; */
+}
+
+/*//**右版**/ /*/
+/*文字*/
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 10px;
+}
+
+.rel {
+    font-size: 1rem;
+    display: inline-block;
+}
+
+.rel_n {
+    font-size: 1rem;
+    color: #26bec9;
+    display: inline;
+}
+/*麵包屑*/
+.breadcrumb {
+    /*    background-color: rgb(233, 237, 242);
+*/ color: #3c4554;
+    background-color: #e9edf2;
+    padding-top: 0.5rem;
+}
+
+
+    .breadcrumb a {
+        color: #3c4554;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        .breadcrumb a:hover {
+            color: #5b7ce3;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+/*背景*/
+.bd_board {
+    background-color: rgb(242, 246, 252);
+}
+
+.input-group-text {
+    border-right: none;
+    background-color: #fff;
+}
+
+/*分頁*/
+.page-navigator {
+    float: right;
+}
+
+/*下拉選單*/
+.btn:hover {
+    background-color: #FFF;
+    color: #333;
+}
+
+.downlist {
+    display: block;
+    float: right;
+}
+
+.btn-danger {
+    border-color: #666;
+    background-color: #fff;
+    color: #333;
+    width: 80px;
+    height: 25px;
+    border-radius: 0;
+    color: #666;
+    font-size: 1em;
+}
+
+    .btn-danger > span {
+        float: left;
+        line-height: normal;
+    }
+/*搜尋框*/
+.input-group {
+    width: 400px;
+    height: 35px;
+    padding-top: 10px;
+}
+
+/*表單*/
+.table {
+    margin-top: 45px;
+    line-height: normal;
+}

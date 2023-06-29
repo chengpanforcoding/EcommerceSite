@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@*@{
+    Layout = "_Layout";
+}*@
+
+@{
+    //string ControllerName = Convert.ToString(HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"]);
+    string ControllerName = @ViewContext.RouteData.Values["controller"].ToString();
+
+    //Console.WriteLine(ControllerName);
+
+    switch (ControllerName)
+    {
+        case "Backstage":
+            Layout = "~/Views/Shared/_BackLayout.cshtml";
+            break;
+        default:
+            Layout = "~/Views/Shared/_Layout.cshtml";
+            break;
+    }
+}   

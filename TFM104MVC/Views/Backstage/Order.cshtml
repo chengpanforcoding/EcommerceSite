@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "後台查看訂單明細";
+}
+
+<link href="/css/BackSingleOrder.css" rel="stylesheet" type="text/css">
+
+
+<!--麵包屑-->
+@*<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">後台面板</a></li>
+            <li class="breadcrumb-item"><a href="#">訂單管理</a></li>
+            <li class="breadcrumb-item active" aria-current="page">訂單 #1234</li>
+        </ol>
+    </nav>*@
+
+<section id="firmOrderDetails">
+    <section v-for="item in orderDetailList">
+        <div class="breadcrumb d-flex align-items-center">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a onclick="location.href='@Url.Action("Home", "Backstage")'">後台面板</a>
+                    </li>
+                    <li class="breadcrumb-item"><a onclick="location.href='@Url.Action("OrderList", "Backstage")'">訂單管理</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">訂單 #{{item.id}}</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="page-title">
+            <h2>訂單#{{item.id}}</h2>
+            <h5>成立時間：{{item.date}}</h5>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-warning"><i class="bi bi-printer"></i>列印</button>
+            <button type="button" class="btn btn-success" v-on:click="doneOrder"><i class="bi bi-check-lg"></i>結案訂單</button>
+            <button type="button" class="btn btn-danger" v-on:click="cancelOrder"><i class="bi bi-slash-circle"></i>取消訂單</button>
+        </div>
+
+        <!--訂單明細-->
+        <div class="container row">
+            <div class="col-md-7">
+                <span class="tb-title"><i class="bi bi-list-ol"></i>訂單明細</span>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">購買商品品項</th>
+                            <th scope="col">價格</th>
+                            <th scope="col">數量</th>
+                            <th scope="col">金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item1 in item.orderdetails">
+                            <th scope="row">
+                                <a v-bind:href="'/ProductView/product/'+ item1.productId" target="_blank" rel="noopener" class="product-name">{{item1.product.title}}</a>
+                                @*<div><a href="" class="discount-name">優惠券折扣項目</a></div>*@
+                            </th>
+                            <td>{{item1.unitPrice}}</td>
+                            <td>{{item1.quantity}}</td>
+                            <td>{{item1.unitPrice * item1.quantity}}</td>
+                        </tr>
+                        <tr style="font-size: 16px;">
+                            <th colspan="3">小計</th>
+                            <td>${{totalPrice}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">折扣明細</th>
+                            <th scope="col">價格</th>
+                            <th scope="col">數量</th>
+                            <th scope="col">金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" colspan="3">廠商折扣</th>
+                            <td>-{{discount}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">折扣後</th>
+                            <td>{{discountPrice}}</td>
+                        </tr>
+                        <tr style="font-size: 16px;">
+                            <th colspan="3">總金額</th>
+                            <td>${{discountPrice}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--貨款&購買人資訊-->
+            <div class="col-md-5">
+                <div class="pay-title">
+                    <p style="font-size: 13px;">貨款</p>
+                </div>
+                <table class="pat-tab">
+                    <tr>
+                        <th class="col-2">付款方式</th>
+                        <td class="col-1">信用卡</td>
+                    </tr>
+                    <tr>
+                        <th class="col-2">付款狀態</th>
+                        <td class="col-1">{{item.orderStatus}}</td>
+                    </tr>
+                </table>
+                <div class="pay-detail">
+                    <p style="font-size: 16px;">
+                        <i class="bi bi-person-fill" style="color: orange;"></i>購買人資訊
+                    </p>
+                </div>
+                <table class="pay-name">
+                    <tr>
+                        <th class="col-2">購買人姓名</th>
+                        <td class="col-1">{{item.name}}</td>
+                    </tr>
+                    <tr>
+                        <th class="col-2">聯絡信箱</th>
+                        <td class="col-1">{{item.email}}</td>
+                    </tr>
+                    <tr>
+                        <th class="col-2">連絡電話</th>
+                        <td class="col-1">{{item.phone}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+</section>
+
+<script>
+    var url = location.pathname;
+    console.log(url);
+    var orderId = url.replace("/Backstage/order/", ""); //字元處理 移除"/Backstage/order/" 字串
+
+    var appFirmOrderDetail = new Vue({
+        el: "#firmOrderDetails",
+        data: {
+            orderDetailList: [],
+            paidStatus: {
+                "NotPaid": "未付款",
+                "Paid": "已付款",
+                "Canceled": "已取消",
+                "Done": "已結案"
+            }
+        },
+        computed: {
+            totalPrice: function () {
+                var item = this.orderDetailList[0].orderdetails;
+                var amt = item.map(x => x.unitPrice * x.quantity).reduce((now, next) => now + next, 0);
+                return amt;
+            },
+            discount: function () {
+                var item = this.orderDetailList[0].orderdetails;
+                var amt = item.map(x => (x.unitPrice * x.quantity) * (1 - x.discountPersent)).reduce((now, next) => now + next, 0);
+                return Math.round(amt);
+            },
+            discountPrice: function () {
+                var item = this.orderDetailList[0].orderdetails;
+                var amt = item.map(x => (x.unitPrice * x.quantity * x.discountPersent)).reduce((now, next) => now + next, 0);
+                return amt;
+            }
+        },
+        mounted: function () {
+            this.getOrder();
+        },
+        methods: {
+            getOrder: function () {
+                let self = this;
+                axios.get("/api/Orders/manage/" + orderId).then(function (res) {
+                    for (let i of res.data) {
+                        i.orderStatus = self.paidStatus[i.orderStatus];
+                    }
+                    self.orderDetailList = res.data;
+                    console.log(self.orderDetailList);
+                })
+                    .catch(function (err) {
+                        if (err.status == 404) {
+                            alertWrong(err.data);
+                        }
+                    })
+            },
+            cancelOrder: function () {
+                let self = this;
+                axios.post("/api/orders/cancel/" + orderId)
+                    .then(function (res) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '取消訂單成功',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            willClose: (toast) => {
+                                location.reload();
+                            }
+                        });
+                        //alert("取消訂單成功");
+                        //location.reload();
+                    })
+            },
+            doneOrder: function () {
+                axios.post("/api/orders/done/" + orderId)
+                    .then(function (res) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '訂單結案成功',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            willClose: (toast) => {
+                                location.reload();
+                            }
+                        });
+                        //alert("訂單結案成功");
+                        //location.reload();
+                    })
+            }
+        }
+    })
+
+</script>

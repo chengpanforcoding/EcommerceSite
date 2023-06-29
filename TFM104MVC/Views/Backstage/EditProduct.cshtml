@@ -1,0 +1,426 @@
+﻿@{
+    ViewData["Title"] = "後台修改商品";
+}
+
+<link rel="stylesheet" href="/css/BackEditProduct.css" type="text/css">
+
+<!-- 右側本體內容-->
+<div class="container g-3" id="editproduct">
+    <!--麵包屑-->
+    <div class="row breadcrumb mt-3">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a onclick="location.href='@Url.Action("ProductList", "Backstage")'">所有商品</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">編輯商品</li>
+            </ol>
+        </nav>
+    </div>
+    <!--商品名稱-->
+    <div class="row">
+        <p class="fs-3 fw-bold" style="color: #3c5587;">
+            {{add.title}}
+        </p>
+    </div>
+    <!--商品編輯icon群組-->
+    <div class="row">
+        <div class="icon-btn-group d-flex gap-3">
+            <div>
+                <a href="javascript:void(0);" v-on:click="goPublic">
+                    <span>
+                        <i class="bi bi-eye"></i>
+                    </span>
+                    <span>
+                        公開
+                    </span>
+                </a>
+            </div>
+            <div>
+                <a v-bind:href=" '/ProductView/product/'+ pid " target="_blank" rel="noopener">
+                    @*<a href="">*@
+                    <span>
+                        <i class="bi bi-box-arrow-up-right"></i>
+                    </span>
+                    <span>前往該商品</span>
+                </a>
+            </div>
+            <div>
+                <a href="">
+                    <span>
+                        <i class="far fa-copy"></i>
+                    </span>
+                    <span>複製</span>
+                </a>
+            </div>
+            <div>
+                <a href="" v-on:click.prevent="del">
+                    <span><i class="bi bi-trash3"></i></span>
+                    <span>刪除商品</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--商品編輯本體內容-->
+    <div class="product-edit-body mt-3">
+        <!--區塊標題-->
+        <div class="body-title">
+            <p class="fs-5 fw-bold" style="color: #3c5587;">
+                基本設定
+            </p>
+        </div>
+        <!--商品名稱-->
+        <div class="prdouct-name mb-3">
+            <label for="prdouctNameFormControlInput" class="form-label fs-6 "
+                   style="color: #3c5587;">商品名稱(必填)</label>
+            <input type="text" class="form-control" id="prdouctNameFormControlInput"
+                   placeholder="請輸入商品名稱" v-model="add.title">
+        </div>
+        <!--商品價格-->
+        <div class="prdouct-price mb-3 d-flex gap-3">
+            <div class="origin-price">
+                <label for="prdouctPriceFormControlInput" class="form-label fs-6 "
+                       style="color: #3c5587;">商品價格(必填)</label>
+                <input type="text" class="form-control" id="prdouctPriceFormControlInput"
+                       placeholder="請輸入商品定價" v-model="add.originalPrice">
+            </div>
+            <div class="price-discount">
+                <label for="prdouctDiscountFormControlInput" class="form-label fs-6 "
+                       style="color: #3c5587;">商品折扣</label>
+                <input type="text" class="form-control" id="prdouctDiscountFormControlInput"
+                       placeholder="請輸入商品折扣" v-model="add.discountPersent">
+            </div>
+        </div>
+        <!--商品選擇-->
+        <div class="prdouct-choose">
+            <p class="fs-6 " style="color: #3c5587;">
+                商品相關分類設定
+            </p>
+            <div class="d-flex gap-3">
+                <!-- 商品分類 -->
+                <div class="product-type">
+                    <select class="form-select" aria-label="product-type" v-model="add.tripType">
+                        <option value="" selected disabled>商品分類</option>
+                        <option value="0">露營</option>
+                        <option value="1">水上活動</option>
+                        <option value="2">人文之旅</option>
+                        <option value="3">地方特色</option>
+                        <option value="4">溫泉之旅</option>
+                    </select>
+                </div>
+                <!-- 商品狀態 -->
+                <div class="product-status">
+                    <select class="form-select" aria-label="product-status" v-model="add.productStatus">
+                        <option value="" selected disabled>商品狀態</option>
+                        <option value="0">未審核</option>
+                        <option value="1">已上架</option>
+                        <option value="2">已下架</option>
+                    </select>
+                </div>
+                <!-- 地區分類 -->
+                <div class="region-type">
+                    <select class="form-select" aria-label="region-type" v-model="add.region">
+                        <option value="" selected disabled>地區分類</option>
+                        <option value="0">北北基</option>
+                        <option value="1">桃竹苗</option>
+                        <option value="2">中彰投</option>
+                        <option value="3">雲嘉南</option>
+                        <option value="4">高屏</option>
+                        <option value="5">宜花東</option>
+                        <option value="6">離島地區</option>
+                    </select>
+                </div>
+                <!-- 旅遊天數 -->
+                <div class="travel-day">
+                    <select class="form-select" aria-label="travel-day" v-model="add.travelDays">
+                        <option value="" selected disabled>旅遊天數</option>
+                        <option value="0">1天</option>
+                        <option value="1">2天</option>
+                        <option value="2">3天</option>
+                        <option value="3">4天</option>
+                        <option value="4">5天</option>
+                        <option value="5">6天</option>
+                        <option value="6">7天</option>
+                        <option value="7">8天</option>
+                        <option value="8">8天以上</option>
+                    </select>
+                </div>
+
+                <!-- 出發日期 -->
+                <div class="travel-date d-flex align-content-center" v-model="add.goTouristTime">
+                    <input type="date" id="meeting-time" name="meeting-time"
+                           value="2022-05-06T19:30" min="2018-06-07T00:00" max="2025-06-14T00:00" v-model="add.goTouristTime">
+                </div>
+            </div>
+        </div>
+        <!-- 商品描述 -->
+        <div class="product-description mt-3">
+            <p class="fs-6 " style="color: #3c5587;">
+                商品描述
+            </p>
+            <textarea id="description" name="description" rows="10" cols="105" v-model="add.description">請輸入關於商品的描述</textarea>
+        </div>
+        <!-- 商品備註 -->
+        @*<div class="product-note mt-3">
+                <p class="fs-6" style="color: #3c5587;">
+                    商品備註
+                </p>
+                <textarea id="note" name="note" rows="5" cols="105">請輸入商品備註</textarea>
+            </div>*@
+    </div>
+    <!--商品圖片編輯-->
+    <div class="product-edit-body mt-3 mb-3">
+        <p class="fs-5 fw-bold" style="color: #3c5587;">
+            商品圖片
+        </p>
+        <div class="photo-display-container mb-3">
+            <div class="photo-display">
+                <img :src="add.productPictures[0].url" style="width:100px;">
+                @*<div class="photo-edit-icons">
+                        <i class="bi bi-arrows-move"></i>
+                        <i class="bi bi-x-lg"></i>
+                    </div>*@
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <input accept="image/*" multiple type="file" class="form-control" id="inputGroupFile" v-on:change="uppic">
+            <label class="input-group-text" for="inputGroupFile">Upload</label>
+        </div>
+        <!-- <div class="upload-photo-area">
+            <input class="form-control" accept="image/*" multiple type="file" autocomplete="off" tabindex="-1" >
+        </div> -->
+    </div>
+    <!--商品儲存btn-->
+    <div class="product-btn d-flex gap-3">
+        <div class="mb-5">
+            <button type="button" class="btn btn-primary" v-on:click="save">
+                儲存
+            </button>
+        </div>
+        <div class="">
+            <button onclick="location.href='@Url.Action("ProductList", "Backstage")'" type="button" class="btn btn-outline-primary">
+                返回列表
+            </button>
+        </div>
+    </div>
+
+</div>
+<script>
+    var getUrlString = location.pathname; //抓網頁路徑部分(/ProductView/product/XXXXX)
+    var pid = getUrlString.replace("/Backstage/EditProduct/", "");//字元處理 移除"/ProductView/product/" 字串
+    //console.log(pid);
+    var editproductVue = new Vue({
+        el: '#editproduct',
+        data: {
+            add: {
+                title: "",
+                originalPrice: "",
+                discountPersent: "",
+                goTouristTime: "",
+                travelDays: "",
+                tripType: "",
+                region: "",
+                description: "",
+                productStatus: "",
+                productPictures: [],
+            },
+            sectionRegionObject: {
+                "North": 0,
+                "MiddleNorth": 1,
+                "Middle": 2,
+                "MiddleSouth": 3,
+                "South": 4,
+                "East": 5,
+                "OutsideIsland": 6
+            },
+            sectionTripTypeObject: {
+                "Camping": 0,
+                "WaterActivities": 1,
+                "HistoryJourney": 2,
+                "LocalSpecialties": 3,
+                "SpringTour": 4
+            },
+            sectionTravelDaysObject: {
+                "One": 0,
+                "Two": 1,
+                "Three": 2,
+                "Four": 3,
+                "Five": 4,
+                "Six": 5,
+                "Seven": 6,
+                "Eight": 7,
+                "EightPlus": 8
+            },
+            sectionProductStatusObject: {
+                "Unapproved": 0,
+                "Launched": 1,
+                "NotSold": 2
+            },
+            pid: pid
+
+        },
+        computed: {
+            //productLink: function () {
+            //    var x = "ProductView/product/" + pid;
+            //    return x;
+            //}
+
+        },
+        mounted: function () {
+            var self = this;
+            //axios.get("/api/products/" + pid).then(function (res) { self.list = res.data })
+            axios.get("/api/products/" + pid).then(function (res) {
+                //for (let i of res.data) {
+                //    i.region = self.sectionObject[i.region];
+                //}
+                /*  self.product = res.data;*/
+
+                res.data.region = self.sectionRegionObject[res.data.region];
+                res.data.tripType = self.sectionTripTypeObject[res.data.tripType];
+                res.data.travelDays = self.sectionTravelDaysObject[res.data.travelDays];
+                res.data.productStatus = self.sectionProductStatusObject[res.data.productStatus];
+
+                self.add.title = res.data.title;
+                self.add.originalPrice = res.data.originalPrice;
+                self.add.discountPersent = res.data.discountPersent;
+                self.add.goTouristTime = res.data.goTouristTime;
+                self.add.travelDays = res.data.travelDays;
+                self.add.tripType = res.data.tripType;
+                self.add.region = res.data.region;
+                self.add.description = res.data.description;
+                self.add.productPictures = res.data.productPictures;
+                self.add.productStatus = res.data.productStatus;
+            })
+
+        },
+        methods: {
+            getProductInfo: function () {
+                var self = this;
+                axios.get("/api/products/" + pid).then(function (res) {
+                    self.add.title = res.data.title;
+                    self.add.originalPrice = res.data.originalPrice;
+                    self.add.discountPersent = res.data.discountPersent;
+                    self.add.goTouristTime = res.data.goTouristTime;
+                    self.add.travelDays = res.data.travelDays;
+                    self.add.tripType = res.data.tripType;
+                    self.add.region = res.data.region;
+                    self.add.description = res.data.description;
+                    self.add.productPictures = res.data.productPictures;
+                    self.add.productStatus = res.data.productStatus;
+
+                });
+            },
+            uppic: function (event) {
+                // console.log(event);
+                /*  this.add.productPictures = event.target.files[0]*/
+                var input = event.target;
+                var count = input.files.length;
+                var index = 0;
+                if (input.files) {
+                    while (count--) {
+                        var reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.add.productPictures.push(e.target.result);
+                        }
+                        this.add.productPictures.push(input.files[index]);
+                        reader.readAsDataURL(input.files[index]);
+                        index++;
+
+                    }
+                    //this.image = input.files[0];
+                    //reader.readAsDataURL(input.files[0]);
+
+                    /*    this.add.productPictures = event.target.files[1]*/
+                    /*  alert("你上傳了拉~~");*/
+                }
+            },
+            save: function () {
+                var self = this;
+                var bodyFormData = new FormData();
+                bodyFormData.append("title", this.add.title);
+                bodyFormData.append("originalPrice", this.add.originalPrice);
+                bodyFormData.append("discountPersent", this.add.discountPersent);
+                bodyFormData.append("tripType", this.add.tripType);
+                bodyFormData.append("region", this.add.region);
+                bodyFormData.append("travelDays", this.add.travelDays);
+                bodyFormData.append("description", this.add.description);
+                bodyFormData.append("goTouristTime", this.add.goTouristTime);
+                bodyFormData.append("productStatus", this.add.productStatus);
+                for (let index = 0; index < this.add.productPictures.length; index++) {
+                    bodyFormData.append("pic", this.add.productPictures[index]);
+                }
+                axios({
+                    method: "put",
+                    url: "/api/products/" + pid,
+                    data: bodyFormData,
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                }).then(
+                    function (res) {
+                        if (res.status == 204) {
+                            //alertSuccess("修改成功")
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '修改成功',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    self.getProductInfo();
+                                    location.reload();
+                                }
+                            });
+                        }
+                    }
+                )
+                    .catch(
+                        function (err) {
+                            if (err.status == 404) {
+                                alertWrong("沒有此商品")
+                            }
+                            else if (error.status == 422) {
+                                for (var i of Object.keys(error.data.errors)) {
+                                    alertWrong(error.data.errors[i][0]);
+                                }
+                            }
+                        }
+                    )
+            },
+            goPublic: function () {
+                var self = this;
+                //var url = "/api/products/" + self.pid + "/goPublic";
+                axios.post("/api/products/" + self.pid + "/goPublic")
+                    .then(function (res) {
+                        if (res.status == 200) {
+                            alertSuccess(res.data);
+                        }
+                    }).catch(function (err) { console.log(err.data); })
+            },
+            del: function () {
+                let self = this;
+                axios.delete("/api/products/" + self.pid).then(
+                    function (res) {
+                        if (res.status == 204) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: "刪除成功",
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    location.href="/BackStage/productList";
+                                }
+                            });
+                        }
+                    }
+                ).catch(
+                    function (err) {
+                        alertWrong(err.data);
+                    }
+                )
+
+            },
+
+        }
+    });
+</script>
+

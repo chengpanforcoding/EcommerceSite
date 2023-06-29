@@ -1,0 +1,293 @@
+﻿@{
+    ViewData["Title"] = "後台新增商品";
+}
+
+<link rel="stylesheet" href="/css/BackNewProduct.css" type="text/css">
+
+<!-- 右側本體內容-->
+<div class="container g-3" id="newProduct">
+    <!--麵包屑-->
+    <div class="row breadcrumb mt-3">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a onclick="location.href='@Url.Action("ProductList", "Backstage")'">所有商品</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">新增商品</li>
+            </ol>
+        </nav>
+    </div>
+    <!--新增商品標題-->
+    <div class="row">
+        <p class="fs-3 fw-bold" style="color: #3c5587;">
+            新增商品
+        </p>
+    </div>
+    <!--商品編輯本體內容-->
+    <div class="product-edit-body mt-3">
+        <!--區塊標題-->
+        <div class="body-title">
+            <p class="fs-5 fw-bold" style="color: #3c5587;">
+                基本設定
+            </p>
+        </div>
+        <!--商品名稱-->
+        <div class="prdouct-name mb-3">
+            <label for="prdouctNameFormControlInput" class="form-label fs-6 "
+                   style="color: #3c5587;">商品名稱(必填)</label>
+            <input type="text" class="form-control" id="prdouctNameFormControlInput"
+                   placeholder="請輸入商品名稱" v-model="add.title">
+        </div>
+        <!--商品價格-->
+        <div class="prdouct-price mb-3 d-flex gap-3">
+            <div class="origin-price">
+                <label for="prdouctPriceFormControlInput" class="form-label fs-6 "
+                       style="color: #3c5587;">商品價格(必填)</label>
+                <input type="text" class="form-control" id="prdouctPriceFormControlInput"
+                       placeholder="請輸入商品定價" v-model="add.originalPrice">
+            </div>
+            <div class="price-discount">
+                <label for="prdouctDiscountFormControlInput" class="form-label fs-6 "
+                       style="color: #3c5587;">商品折扣</label>
+                <input type="text" class="form-control" id="prdouctDiscountFormControlInput"
+                       placeholder="請輸入商品折扣" v-model="add.discountPersent">
+            </div>
+        </div>
+        <!--商品選擇-->
+        <div class="prdouct-choose">
+            <p class="fs-6 " style="color: #3c5587;">
+                商品相關分類設定
+            </p>
+            <div class="d-flex gap-3">
+                <!-- 商品分類 -->
+                <div class="product-type">
+                    <select class="form-select" aria-label="product-type" v-model="add.tripType">
+                        <option value="" selected disabled>商品分類</option>
+                        <option value="0">露營</option>
+                        <option value="1">水上活動</option>
+                        <option value="2">人文之旅</option>
+                        <option value="3">地方特色</option>
+                        <option value="4">溫泉之旅</option>
+                    </select>
+                </div>
+                <!-- 商品狀態 -->
+                <div class="product-status">
+                    <select class="form-select" aria-label="product-status" v-model="add.productStatus">
+                        <option value="" selected disabled>商品狀態</option>
+                        <option value="0">未審核</option>
+                        <option value="1">已上架</option>
+                        <option value="2">已下架</option>
+                    </select>
+                </div>
+                <!-- 地區分類 -->
+                <div class="region-type">
+                    <select class="form-select" aria-label="region-type" v-model="add.region">
+                        <option value="" selected disabled>地區分類</option>
+                        <option value="0">北北基</option>
+                        <option value="1">桃竹苗</option>
+                        <option value="2">中彰投</option>
+                        <option value="3">雲嘉南</option>
+                        <option value="4">高屏</option>
+                        <option value="5">宜花東</option>
+                        <option value="6">離島地區</option>
+                    </select>
+                </div>
+                <!-- 旅遊天數 -->
+                <div class="travel-day">
+                    <select class="form-select" aria-label="travel-day" v-model="add.travelDays">
+                        <option value="" selected disabled>旅遊天數</option>
+                        <option value="0">1天</option>
+                        <option value="1">2天</option>
+                        <option value="2">3天</option>
+                        <option value="3">4天</option>
+                        <option value="4">5天</option>
+                        <option value="5">6天</option>
+                        <option value="6">7天</option>
+                        <option value="7">8天</option>
+                        <option value="8">8天以上</option>
+                    </select>
+                </div>
+
+                <!-- 出發日期 -->
+                <div class="travel-date d-flex align-content-center">
+                    <input type="date" id="meeting-time" name="meeting-time"
+                           value="2022-05-06T19:30" min="2018-06-07T00:00" max="2025-06-14T00:00" v-model="add.goTouristTime">
+                </div>
+            </div>
+        </div>
+        <!-- 商品描述 -->
+        <div class="product-description mt-3">
+            <p class="fs-6 " style="color: #3c5587;">
+                商品描述
+            </p>
+            <textarea id="description" name="description" rows="10" cols="105" v-model="add.description">請輸入關於商品的描述</textarea>
+        </div>
+        <!-- 商品備註 -->
+        <!--<div class="product-note mt-3">
+            <p class="fs-6" style="color: #3c5587;">
+                商品備註
+            </p>
+            <textarea id="note" name="note" rows="5" cols="105">請輸入商品備註</textarea>
+        </div>-->
+    </div>
+    <!--商品圖片編輯-->
+    <div class="product-edit-body mt-3 mb-3">
+        <p class="fs-5 fw-bold" style="color: #3c5587;">
+            商品圖片
+        </p>
+        <div class="photo-display-container mb-3">
+            <div class="photo-display">
+                <img src="https://fakeimg.pl/100x100/">
+                @*<div class="photo-edit-icons">
+                    <i class="bi bi-arrows-move"></i>
+                    <i class="bi bi-x-lg"></i>
+                </div>*@
+            </div>
+        </div>
+        <form>
+            <div class="input-group mb-3">
+                <input accept="image/*" multiple type="file" class="form-control" id="inputGroupFile" v-on:change="uppic">
+                <label class="input-group-text" for="inputGroupFile">Upload</label>
+            </div>
+        </form>
+    </div>
+    <!--商品儲存btn-->
+    <div class="product-btn d-flex gap-3">
+        <div class="mb-5">
+            <button type="button" class="btn btn-primary" v-on:click="save">
+                儲存
+            </button>
+        </div>
+        <div class="">
+            <button onclick="location.href='@Url.Action("ProductList", "Backstage")'" type="button" class="btn btn-outline-primary">
+                返回列表
+            </button>
+        </div>
+    </div>
+
+</div>
+<script>
+    var newProduct = new Vue({
+        el: '#newProduct',
+        data: {
+            preview: null,
+            image: null,
+            preview_list: [],
+
+
+            add: {
+                title: "",
+                originalPrice: "",
+                discountPersent: "",
+                goTouristTime: "",
+                travelDays: "",
+                tripType: "",
+                region: "",
+                description: "",
+                productStatus:"",
+                productPictures: [],
+
+            },
+
+        },
+        methods: {
+            previewImage: function (event) {
+                var input = event.target;
+                if (input.files) {
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.preview = e.target.result;
+                    }
+                    //this.image = input.files[0];
+                    //reader.readAsDataURL(input.files[0]);
+                }
+            },
+            uppic: function (event) {
+                // console.log(event);
+                /*  this.add.productPictures = event.target.files[0]*/
+                var input = event.target;
+                var count = input.files.length;
+                var index = 0;
+                if (input.files) {
+                    while (count--) {
+                        var reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.add.productPictures.push(e.target.result);
+                        }
+                        this.add.productPictures.push(input.files[index]);
+                        reader.readAsDataURL(input.files[index]);
+                        index++;
+
+                    }
+                    //this.image = input.files[0];
+                    //reader.readAsDataURL(input.files[0]);
+
+                    /*    this.add.productPictures = event.target.files[1]*/
+                    /*  alert("你上傳了拉~~");*/
+                }
+            },
+            reset: function () {
+                //this.image = null;
+                //this.preview = null;
+                this.add.productPictures = [];
+                this.preview_list = [];
+            },
+            save: function () {
+                var bodyFormData = new FormData();
+                bodyFormData.append("title", this.add.title);
+                bodyFormData.append("originalPrice", this.add.originalPrice);
+                bodyFormData.append("discountPersent", this.add.discountPersent);
+                bodyFormData.append("tripType", this.add.tripType);
+                bodyFormData.append("region", this.add.region);
+                bodyFormData.append("travelDays", this.add.travelDays);
+                bodyFormData.append("description", this.add.description);
+                //bodyFormData.append("pic", this.add.productPictures);
+                bodyFormData.append("goTouristTime", this.add.goTouristTime);
+                bodyFormData.append("productStatus", this.add.productStatus);
+                for (let index = 0; index < this.add.productPictures.length; index++) {
+                    bodyFormData.append("pic", this.add.productPictures[index]);
+                }
+                let self = this;
+                axios({
+                    method: "post",
+                    url: "/api/products",
+                    data: bodyFormData,
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                }).then(function (response) {
+                    if (response.status === 201) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '您已成功新增商品了',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            willClose: (toast) => {
+                                window.location.href = "/BackStage/ProductList";
+
+                            }
+                        });
+                        //alertSuccess("你已成功新增商品了");
+                        //self.add.title = "";
+                        //self.add.originalPrice = "";
+                        //self.add.description = "";
+                        //self.add.discountPersent = "";
+                        //self.add.goTouristTime = "";
+                        //self.add.travelDays = "";
+                        //self.add.tripType = "";
+                        //self.add.region = "";
+                        //self.add.productStatus = "";
+                        //var obj = document.getElementById("inputGroupFile");
+                        //obj.outerHTML = obj.outerHTML;
+
+                    }
+                    console.log(response.data)
+
+                })
+                    .catch(function (error) {
+                        alertWrong(error.data);
+
+                    });
+            },
+        }
+    });
+</script>

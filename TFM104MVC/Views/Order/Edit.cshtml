@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewData["Title"] = "訂單修改";
+}
+
+<link rel="stylesheet" href="/css/orderEdit.css" type="text/css">
+
+
+<!--主要區塊-->
+<section class="section">
+    <div class="container ">
+        <div class="row col-md-10">
+            <div class="bd_board shadow mb-3">
+                <table class="table table-borderless shadow border-0">
+                    <thead class="table-list">
+                        <tr class="col-sm-1">
+                            <tb class="table-title">
+                                <div class="title">
+                                    <p class="title_w">
+                                        訂單管理<img src="https://i.imgur.com/gfyymzf.png"
+                                                 style="width: 18px; height: 18px;">修改訂單
+                                    </p>
+                                </div>
+                                <span>
+                                    <input class="form-check-input" type="checkbox" value="" id="allcheck"
+                                           onclick="demo()">
+                                    <label class="form-check-label" for="flexCheckDefault">全選</label>
+                                </span>
+                            </tb>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="col">
+                            <th>
+                                <input class="form-check-input" type="checkbox" id="check" name="choice"
+                                       onclick="setAll()" aria-label="img-fluid">
+                            </th>
+                            <th>
+                                <a href="">
+                                    <img src="https://picsum.photos/200/150?ramdom=10"
+                                         class="img-fluid rounded">
+                                </a>
+                            </th>
+                            <th>
+                                <div class="card-body">
+                                    <h7 class="card-title">ProductName</h7>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </th>
+                            <th>
+                                <p class="quantity">x1</p>
+                            </th>
+                            <th>
+                                <p class="pricetag">NTD 3000</p>
+                            </th>
+                        </tr>
+                        <tr class="col">
+                            <th>
+                                <input class="form-check-input" type="checkbox" id="check" name="choice"
+                                       onclick="setAll()" aria-label="img-fluid">
+                            </th>
+                            <th>
+                                <a href="">
+                                    <img src="https://picsum.photos/200/150?ramdom=10"
+                                         class="img-fluid rounded">
+                                </a>
+                            </th>
+                            <th>
+                                <div class="card-body">
+                                    <h7 class="card-title">ProductName</h7>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </th>
+                            <th>
+                                <p class="quantity">x1</p>
+                            </th>
+                            <th>
+                                <p class="pricetag">NTD 3000</p>
+                            </th>
+                        </tr>
+                        <tr class="col">
+                            <th>
+                                <input class="form-check-input" type="checkbox" id="check" name="choice"
+                                       onclick="setAll()" aria-label="img-fluid">
+                            </th>
+                            <th>
+                                <a href="">
+                                    <img src="https://picsum.photos/200/150?ramdom=10"
+                                         class="img-fluid rounded">
+                                </a>
+                            </th>
+                            <th>
+                                <div class="card-body">
+                                    <h7 class="card-title">ProductName</h7>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </th>
+                            <th>
+                                <p class="quantity">x1</p>
+                            </th>
+                            <th>
+                                <p class="pricetag">NTD 3000</p>
+                            </th>
+                        </tr>
+                        <tr class="col">
+                            <th>
+                                <input class="form-check-input" type="checkbox" id="check" name="choice"
+                                       onclick="setAll()" aria-label="img-fluid">
+                            </th>
+                            <th>
+                                <a href="">
+                                    <img src="https://picsum.photos/200/150?ramdom=10"
+                                         class="img-fluid rounded">
+                                </a>
+                            </th>
+                            <th>
+                                <div class="card-body">
+                                    <h7 class="card-title">ProductName</h7>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </th>
+                            <th>
+                                <p class="quantity">x1</p>
+                            </th>
+                            <th>
+                                <p class="pricetag">NTD 3000</p>
+                            </th>
+                        </tr>
+                        <tr class="col">
+                            <th>
+                                <input class="form-check-input" type="checkbox" id="check" name="choice"
+                                       onclick="setAll()" aria-label="img-fluid">
+                            </th>
+                            <th>
+                                <a href="">
+                                    <img src="https://picsum.photos/200/150?ramdom=10"
+                                         class="img-fluid rounded">
+                                </a>
+                            </th>
+                            <th>
+                                <div class="card-body">
+                                    <h7 class="card-title">ProductName</h7>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </th>
+                            <th>
+                                <p class="quantity">x1</p>
+                            </th>
+                            <th>
+                                <p class="pricetag">NTD 3000</p>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mb-3">
+                    <a href="#" class="btn" id="btn_in" role="button" data-bs-toggle="button">
+                        <p>確認送出</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--全選功能-->
+<script type="text/javascript">
+    //點選全選，子複選框被選中
+    function demo() {
+        var allcheck = document.getElementById("allcheck");
+        var choice = document.getElementsByName("choice");
+        for (var i = 0; i < choice.length; i++) {
+            choice[i].checked = allcheck.checked;
+        }
+    }
+
+    //點選子複選框,全選框 選中、取消
+    function setAll() {
+        if (!$(".checknum").checked) {
+            $("#allcheck").prop("checked", false); // 子複選框某個不選擇，全選也被取消
+        }
+        var choicelength = $("input[type='checkbox'][class='checknum']").length;
+        var choiceselect = $("input[type='checkbox'][class='checknum']:checked").length;
+
+        if (choicelength == choiceselect) {
+            $("#allcheck").prop("checked", true);   // 子複選框全部部被選擇，全選也被選擇；1.對於HTML元素我們自己自定義的DOM屬性，在處理時，使用attr方法；2.對於HTML元素本身就帶有的固有屬性，在處理時，使用prop方法。
+        }
+
+    }
+</script>
+
+
+
+<!--回頂部按鈕-->
+@*<div class="scroll-top-wrapper">
+        <button type="button" id="BackTop" class="scroll-top-inner" style="float: right;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+            </svg>
+        </button>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#BackTop').click(function () {
+                $('html,body').animate({ scrollTop: 0 }, 333);
+            });
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#BackTop').fadeIn(222);
+                } else {
+                    $('#BackTop').stop().fadeOut(222);
+                }
+            }).scroll();
+        });
+    </script>*@

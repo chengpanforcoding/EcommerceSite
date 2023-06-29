@@ -1,0 +1,402 @@
+/*底*/
+.container {
+    margin-top: 15px;
+}
+
+.page-wrap {
+    background-color: silver;
+}
+/*按鈕效果*/
+.card-items .btn {
+    /*    font-size: 14px;
+    color: #FFF;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+   */ background-color: #26bec9;
+    border: none;
+    float: right;
+    position: relative;
+    margin-left: 1rem;
+}
+
+    .card-items .btn > p {
+        position: relative;
+        z-index: 1;
+    }
+
+    .card-items .btn::before {
+        content: "";
+        width: 0%;
+        height: 0%;
+        display: block;
+        background-color: rgba(55, 176, 192, 0.404);
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: all .3s ease;
+    }
+
+    .card-items .btn:hover {
+        color: rgba(53, 53, 71, 0.795);
+    }
+
+        .card-items .btn:hover::before {
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+        }
+
+a > p {
+    margin-bottom: 0;
+}
+
+
+/*向上卷軸按鈕*/
+/*.scroll-top-inner {
+    opacity: 40%;
+    background-color: #fff;
+    color: rgb(65, 147, 202);
+    border-style: none;
+    border-radius: 50%;
+    float: right;
+    width: 48px;
+    height: 48px;
+}*/
+
+/*邊框*/
+/*#border-items {
+    width: 650px;
+    height: 365px;
+}*/
+
+/*左資訊欄*/
+.bd_board {
+    background-color: #FFF;
+    margin-top: 5px;
+    width: 250px;
+    height: 450px;
+    text-align: center;
+}
+
+.card-items {
+    /*    width: 770px;
+    height: 180px;*/
+    margin: auto;
+    line-height: 20px;
+}
+
+.card-body {
+    margin-left: 20px;
+    font-size: small;
+    align-items: center;
+}
+
+.card-info {
+    max-height: 180px;
+    margin: auto;
+}
+
+.card-info-inner {
+    align-items: center;
+}
+
+.card-intro {
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card-img-top {
+    align-items: center;
+    margin-top: 10px;
+    width: 110px;
+    height: 110px;
+}
+
+.card-username {
+    font-size: 16px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+#border-online {
+    width: 265px;
+}
+
+#user_account {
+    margin: auto;
+    text-align: center;
+}
+
+.user-account {
+    margin-top: 0px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/*右資訊欄*/
+.board {
+    /*    height: 1000px;
+*/ background-color: white;
+}
+
+.page-head {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+/*底*/
+
+.page-wrap {
+    background-color: rgb(245, 245, 245);
+    display: block;
+    box-sizing: border-box;
+    min-height: 61vh;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+
+/*按鈕*/
+/*.btn {
+    font-size: 14px;
+    color: #FFF;
+    width: 90px;
+    height: 35px;
+    text-align: center;
+    margin: 6px;
+    background-color: darkturquoise;
+    border: none;
+    float: right;
+    position: relative;
+}
+
+    .btn > p {
+        position: relative;
+        z-index: 1;
+    }
+
+    .btn:hover {
+        color: gray;
+    }*/
+
+/*向上卷軸按鈕*/
+/*.scroll-top-inner {
+    opacity: 40%;
+    background-color: #fff;
+    color: rgb(65, 147, 202);
+    border-style: none;
+    border-radius: 50%;
+    float: right;
+    width: 48px;
+    height: 48px;
+}*/
+
+/*左資訊欄*/
+.card-items {
+    padding: 15px;
+}
+
+/*使用者名稱*/
+h4 {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    background: #FFF;
+    color: inherit;
+}
+
+.break-word {
+    text-align: center !important;
+}
+
+/*左欄使用者資訊*/
+.page-aside {
+    display: block;
+    box-sizing: border-box;
+}
+
+.aside-box {
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: .5px;
+    color: #333;
+    margin: auto;
+    overflow-x: hidden;
+}
+
+.page-aside .aside-box {
+    padding: 5px;
+    background-color: #FFF;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.page-aside .editor-logo {
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    position: relative;
+    overflow: visible;
+}
+
+.editor-logo {
+    border-radius: 50%;
+    border: 1px solid #eee;
+    text-align: center;
+    background-color: #eaeaea;
+    background-size: cover;
+    background-position: 50%;
+}
+
+/*左欄下選單*/
+.page-menu {
+    margin-top: 15px;
+    list-style: none;
+    padding-left: 0;
+    background-color: #FFF;
+    border-radius: 5px;
+    font-family: Noto Sans TC,微軟雅黑,Microsoft Yahei,sans-serif;
+}
+
+.list-item-group {
+    line-height: 1.5;
+}
+
+    .list-item-group > .list-item > a {
+        display: flex;
+        -webkit-box-align: start;
+        align-items: flex-start;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+.list-item .list-item-title {
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+}
+
+li {
+    display: list-item;
+}
+
+ul li {
+    border: none;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s linear;
+}
+
+.page-menu li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #eaeaea;
+}
+
+    ul li a:hover {
+        color: #eaeaea;
+    }
+/*左下欄icon*/
+#link-account-setting {
+    display: flex;
+    -webkit-box-align: start;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+    #link-account-setting svg {
+        margin-right: 6px;
+    }
+
+.page-menu li a {
+    display: block;
+    color: #333;
+    padding: 10px 15px;
+}
+
+.page-menu li.active a {
+    color: #26bec9;
+    position: relative;
+}
+
+.page-menu a, a:focus, a:hover {
+    text-decoration: none;
+}
+
+.page-menu a {
+    cursor: pointer;
+    color: #26bec9;
+    transition: .25s;
+    background-color: transparent;
+}
+
+.page-menu li.active a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 4px;
+    background-color: #26bec9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+/*登入*/
+.page-aside .account-group {
+    border-top: 1px solid #eee;
+    margin: 15px -15px 0;
+    padding: 10px 15px 0;
+}
+
+.page-aside .account {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: start;
+    align-items: flex-start;
+    position: relative;
+    margin: 10px;
+    text-align: left;
+    line-height: 1.4;
+    font-family: Noto Sans TC,微軟雅黑,Microsoft Yahei,sans-serif;
+}
+
+/*右資訊欄*/
+.page-wrap .board {
+    border: 0;
+    margin-top: 0;
+}
+
+.board {
+    padding: 10px;
+    background: #FFF;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.page-head {
+    border-bottom: 1px solid #eaeaea;
+    margin: 0 -20px 20px;
+    padding: 0 20px;
+}
+
+h3 {
+    line-height: 1.5;
+    font-family: inherit;
+    font-weight: 700;
+    margin: 0.67em 0;
+    margin-left: 6px;
+}

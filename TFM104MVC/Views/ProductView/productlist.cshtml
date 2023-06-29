@@ -1,0 +1,657 @@
+﻿@{
+    ViewData["Title"] = "商品列表";
+}
+
+<!--自幹css-->
+<link rel="stylesheet" href="/css/allProduct.css" type="text/css">
+
+
+<div class="container" id="search">
+
+    <div class="row breadcrumb mt-3 mb-3">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{keyword}}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row mb-3">
+        <h2 class="fw-bold" v-if="keyword!== ''">
+            搜尋結果"
+            <b class="text-success">
+                {{keyword}}
+            </b>
+            "
+        </h2>
+    </div>
+</div>
+
+<!--商品列表區塊-->
+<div class="container mb-5" id="GetProducts">
+    <div class="row">
+        <!--左側區塊-->
+        <div class="col-12 col-lg-3 ">
+            <!--目的地-->
+            <div class="item">
+                <div class="ms-sm-2">
+                    <p class="fw-bold mb-3">目的地</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="0" id="countryCheck" v-model="regionValue" :true-value="0"
+                               false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck">
+                            北北基
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="countryCheck1" v-model="regionValue" :true-value="1" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck1">
+                            桃竹苗
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="2" id="countryCheck2" v-model="regionValue" :true-value="2" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck2">
+                            中彰投
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="3" id="countryCheck3" v-model="regionValue" :true-value="3" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck3">
+                            雲嘉南
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="4" id="countryCheck4" v-model="regionValue" :true-value="4" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck4">
+                            高屏
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="5" id="countryCheck5" v-model="regionValue" :true-value="5" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck5">
+                            宜花東
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="6" id="countryCheck6" v-model="regionValue" :true-value="6" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="countryCheck6">
+                            離島地區
+                        </label>
+                    </div>
+                    <div class="d-grid gap-2 mt-3 mb-3">
+                        <button class="btn btn-outline-success" type="button">
+                            查看更多目的地
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!--商品類別-->
+            <div class="item">
+                <div class="ms-sm-2">
+                    <p class="fw-bold mb-3">商品類別</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="0" id="productType" v-model="TriptypeValue" :true-value="0" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="productType">
+                            露營
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="productType" v-model="TriptypeValue" :true-value="1" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="productType">
+                            水上活動
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="2" id="productType" v-model="TriptypeValue" :true-value="2" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="productType">
+                            人文之旅
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="3" id="productType" v-model="TriptypeValue" :true-value="3" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="productType">
+                            地方特色
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="4" id="productType" v-model="TriptypeValue" :true-value="4" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="productType">
+                            溫泉之旅
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="5" id="productType" v-model="TriptypeValue" :true-value="5" false-value="" v-on:change="regionClick">
+                        <label class="form-check-label" for="productType">
+                            人文之旅
+                        </label>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--我是出發日-->
+            <div class="item">
+                <div class="btn-datepicker btn d-flex gap-3 " data-bs-toggle="collapse" data-bs-target="#datepicker"
+                     aria-expanded="false" aria-controls="collapseExample">
+                    <span class="text-muted"><i class="bi bi-calendar"></i></span>
+                    <p class="fw-bold  mb-1">篩選出發日期</p>
+                </div>
+            </div>
+
+            <div class="collapse mb-5" id="datepicker">
+                <div class="card card-body">
+                    <input type="date" id="goTravel-time" name="goTravel-time" 
+                        v-on:change="regionClick"  v-model="goTraveltime" />
+                </div>
+            </div>
+
+            <!--評價-->
+            <div class="item">
+                <p class="fw-bold mb-3">評價</p>
+                <div>
+                    <label class="form-label" for="customerRatingRange">1~5分：請選擇</label>
+                </div>
+                <div class="range">
+                    <input type="range" v-on:change="regionClick"  v-model="customerRating" class="form-range" min="1" max="5" step="1" id="customerRatingRange" >
+                </div>
+                <div>
+                    <span class="text-center text-muted">最左：1分；最右：5分</span>
+                </div>
+            </div>
+
+            <!--行程時間-->
+            <div class="item">
+                <p class="fw-bold mb-3">行程天數</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="0" id="travelDays" v-model="TraveldaysValue" :true-value="0" false-value="" v-on:change="regionClick">
+                    <label class="form-check-label" for="travelDays">
+                        1天以內
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="travelDays" v-model="TraveldaysValue" :true-value="1" false-value="" v-on:change="regionClick">
+                    <label class="form-check-label" for="travelDays">
+                        1~3天
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="2" id="travelDays" v-model="TraveldaysValue" :true-value="2" false-value="" v-on:change="regionClick">
+                    <label class="form-check-label" for="travelDays">
+                        3~5天
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="3" id="travelDays" v-model="TraveldaysValue" :true-value="3" false-value="" v-on:change="regionClick">
+                    <label class="form-check-label" for="travelDays">
+                        5天以上
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <!--右側區塊-->
+        <div class="col-12 col-lg-9">
+            <!--商品排序器-->
+            <div class="filter-block mb-3">
+                <div class="filter">
+                    <span class="text-primary">{{productTotal}}</span>項體驗行程
+                </div>
+                <hr class="text-muted">
+                <div class="d-flex flex-wrap">
+                    <div>
+                        <p>排序 :</p>
+                    </div>
+                    <div class="filter-link" v-if="desc">
+                        ｜
+                        <a href="" v-on:click.prevent="orderby('customerRating')">星星推薦(由高至低)</a>
+                    </div>
+                    <div class="filter-link" v-else="desc">
+                        ｜
+                        <a href="" v-on:click.prevent="orderbydesc('customerRating')">星星推薦(由低至高)</a>
+                    </div>
+                    <div class="filter-link" v-if="desc1">
+                        ｜
+                        <a href="" v-on:click.prevent="orderby1('gotouristtime')">出發日期(由遠至近)</a>
+                    </div>
+                    <div class="filter-link" v-else="desc1">
+                        ｜
+                        <a href="" v-on:click.prevent="orderbydesc1('gotouristtime')">出發日期(由近至遠)</a>
+                    </div>
+                    <div class="filter-link" v-if="desc2">
+                        ｜
+                        <a href="" v-on:click.prevent="orderby2('originalprice')">$價格：高到低</a>
+                    </div>
+                    <div class="filter-link" v-else="desc2">
+                        ｜
+                        <a href="" v-on:click.prevent="orderbydesc2('originalprice')">$價格：低到高</a>
+                    </div>
+                </div>
+            </div>
+            <!--商品單項-->
+            <div id="app" v-for="(item, index) in productList.slice(pageStart, pageStart + countOfPage)" :key="index">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <a v-bind:href=" '/ProductView/product/'+ item.id " target="_blank" rel="noopener">
+                                <img v-bind:src="item.productPictures[0].url"
+                                     class="w-100 img-fluid rounded-start product-pic">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a v-bind:href=" '/ProductView/product/'+ item.id " target="_blank" rel="noopener">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title mb-3">{{item.title}}</h5>
+                                        <!--收藏愛心-->
+                                        <div class="text-muted">
+                                            <a href="javascript:void(0);" class="text-danger"><i class="bi bi-heart"></i></a>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!--商品內容敘述-->
+                                <a v-bind:href=" '/ProductView/product/'+ item.id " target="_blank" rel="noopener">
+                                    <p class="card-text mb-3">
+                                        {{item.description |ellipsis}}
+                                    </p>
+                                </a>
+
+                                <!--產品資訊：地點&日期-->
+                                <a v-bind:href=" '/ProductView/product/'+ item.id " target="_blank" rel="noopener">
+                                    <div class="product-info mb-5 d-flex gap-3">
+                                        <!--地點-->
+                                        <div class="d-flex gap-1">
+                                            <span class="text-muted"><i class="bi bi-geo-alt-fill"></i></span>
+                                            <p><small class="text-muted">地點:{{item.region}}</small></p>
+                                        </div>
+                                        <!--日期-->
+                                        <div class="d-flex gap-1">
+                                            <span class="text-muted"><i class="bi bi-calendar"></i></span>
+                                            <p><small class="text-muted">出發日期：{{item.goTouristTime}}</small></p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!--產品資訊：評價&熱門程度&價格-->
+                                <a href="#product-footer " target="_blank" rel="noopener">
+                                    <div class="product-footer d-flex gap-3 position-absolute bottom-0 ">
+                                        <!--評價-->
+                                        <div class="product-star d-flex">
+                                            <span class="text-warning">
+                                                <i class="bi bi-star-fill"></i>
+                                            </span>
+                                            <p><small class="text-muted">{{item.customerRating}}</small></p>
+                                        </div>
+                                        <span class="divider">|</span>
+                                        <!--熱門程度-->
+                                        <div class="prodcut-book d-flex gap-1 text-danger">
+                                            <span><i class="fas fa-fire"></i></span>
+                                            <p><small class="text-muted">xxxx個已訂購</small></p>
+                                        </div>
+                                        <!--價格-->
+                                        <div class="product-price gap-3">
+                                            <div>
+                                                <h4 class="fw-bold">TWD {{item.price }} </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>{{error}}</div>
+
+
+            <!--商品分頁：原始-->
+            @*<div class="mt-5">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination d-flex justify-content-center">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">></a></li>
+                        </ul>
+                    </nav>
+                </div>*@
+
+            <!--商品分頁：新-->
+            <div class="mt-5">
+                <nav aria-label="Page navigation example">
+                    @*<div class="pagination">*@
+                    <ul class="pagination d-flex justify-content-center">
+                        <!--<li class="page-item" v-bind:class="{'disabled': (currPage === 1)}"--> @*currPage=1停止下一頁*@
+                        <!--@@click.prevent="setPage(currPage-1)"><a class="page-link" href="#">&#60 Prev</a></li>-->
+                        @*現在頁面+1*@
+                        <li class="page-item" v-for="n in totalPage" v-bind:class="{'active': (currPage === (n))}"
+                            @@click.prevent="setPage(n)">
+                            <a class="page-link" href="#">{{n}}</a>
+                        </li>
+                        <li class="page-item" v-bind:class="{'disabled': (currPage === totalPage)}"
+                            @@click.prevent="setPage(currPage+1)">
+                            <a class="page-link" v-if="productTotal>0" href="#">></a>
+                        </li>
+                    </ul>
+                </nav>
+                @*</div>*@
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row row-cols-3">
+    </div>
+
+</div>
+
+
+
+<script>
+    var keyword = window.location.search.replace("?", "");
+    var keywordDecode = decodeURI(window.location.search.replace("?keyword=", ""));
+
+    var app242 = new Vue({
+        el: '#search',
+        data: {
+            keyword: keywordDecode,
+        }
+    });
+
+ 
+    var app241 = new Vue({
+        el: '#GetProducts',
+
+        data: {
+            productList: [],
+            error: "",
+            regionValue: "", // 開[]為多選   ""為單選
+            TraveldaysValue: "",
+            TriptypeValue: "",
+            productTotal: '',
+            orderbyClick: '',
+            customerRating: '',
+            goTraveltime: "",
+            pageLeftBtn: true,
+            desc: true,
+            desc1: true,
+            desc2:true,
+            countOfPage: 10,// 幾個一頁
+            currPage: 1,//初始頁
+            sectionObject: {
+                "North": "北北基",
+                "MiddleNorth": "桃竹苗",
+                "Middle": "中彰投",
+                "MiddleSouth": "雲嘉南",
+                "South": "高屏",
+                "East": "宜花東",
+                "OutsideIsland": "離島地區"
+            },
+            chRegion: "",
+            oderbyValue:""
+
+        },
+        computed: {
+            pageStart: function () {
+                return (this.currPage - 1) * this.countOfPage;
+            },
+            totalPage: function () {
+                return Math.ceil(this.productList.length / this.countOfPage);
+            },
+
+        },
+
+        mounted: function () {
+            var self = this;
+
+            axios.get("/api/products?" + keyword).then(function (res) {
+                for (let i of res.data) {
+                    i.region = self.sectionObject[i.region];
+                //    i.goTouristTime = "" +i.goTouristTime;
+                }
+                self.productList = res.data;
+                self.productTotal = res.data.length;
+                //    self.chRegion = app1.sectionObject[res.data.region];
+            }).catch(function (error) {
+                self.error = error.data;
+                self.productList = "";
+                self.productTotal = "0";
+            })
+        },
+
+        methods: {
+            regionClick: function () {
+                var self = this;
+                var regionValue = self.regionValue;
+                var Traveldays = self.TraveldaysValue;
+                var Triptype = self.TriptypeValue
+                var orderbyClick = self.orderbyClick;
+                var customerRating = self.customerRating;
+                var goTraveltime = self.goTraveltime;
+                   //if (goTraveltime != "") { goTraveltime = decodeURI(goTraveltime.replace("T", "+").concat(":00.0000000"));}
+ 
+                //console.log(goTraveltime);
+                //goTraveltime = encodeURI(goTraveltime);
+                //console.log(goTraveltime);
+
+                // api/products?Traveldays=&Region=&Triptype=
+                //    axios.get("/api/products?Region=" + regionValue + "&Traveldays=" + Traveldays + "&Triptype=" + Triptype).then(function (res) {
+
+                //  self.productList = res.data;
+
+                // })
+
+                //   if (regionValue == false || Traveldays == false || Triptype == false) {
+                //   axios.get("/api/products").then(function (res) {
+                // self.productList = res.data;
+                //if (regionValue == false || Traveldays == false || Triptype == false) {
+                //    regionValue === "";
+                //    Traveldays === " ";
+                //    Triptype === " ";
+
+                // axios.get("/api/products?Rating=lessThan" + customerRating).then(function (res) {
+               
+                axios.get("/api/products?Region=" + regionValue + "&Traveldays=" + Traveldays + "&Triptype=" + Triptype + "&Rating=lessThan" + customerRating + "&orderby=" + self.oderbyValue + "&GoTouristTime=" + decodeURI(goTraveltime) + "&" + keyword + "&orderbydesc=" + self.oderbyValue).then(function (res) {
+                    for (let i of res.data) {
+                        i.region = self.sectionObject[i.region];
+
+                    };
+                    console.log(customerRating);
+                    self.productList = res.data;
+                    self.error = "";
+                    self.currPage = "1";
+                    self.productTotal = res.data.length;
+                  //  console.log(this.orderbyClick);
+                    // console.log(regionValue, Traveldays, Triptype);
+                }).catch(function (error) {
+                    self.error = error.data;
+                    self.productList = "";
+                    self.productTotal = "0";
+
+
+                    //    self.productList = error.data;
+                    //    console.log("沒有商品");
+                    //if (error.response.status == 404) {
+                    //    self.productList = error.data;
+                    //    console.log("沒有商品");
+                    //} if (error.response.status == 500) {
+                    //    self.productList = error.data;
+                    //    console.log("沒有商品");
+                    /*  }*/
+                })
+    
+                // }
+            },
+            setPage: function (idx) {//設定頁面
+                if (idx <= 0 || idx > this.totalPage) {
+                    return;
+                }
+                this.currPage = idx;
+            },
+            orderby: function (value) {
+                let self = this;
+                self.oderbyValue = value;
+                var goTraveltime = self.goTraveltime;
+                if (goTraveltime != "") { goTraveltime = decodeURI(goTraveltime.replace("T", "+").concat(":00.0000000")); }
+                axios.get("/api/products?Keyword=" + keywordDecode + "&orderby=" + value + "&Region=" + self.regionValue + "&Traveldays=" + self.TraveldaysValue + "&Triptype=" + self.TriptypeValue + "&Rating=lessThan" + self.customerRating)
+                    .then(
+                        function (res) {
+                            for (let i of res.data) {
+                                i.region = self.sectionObject[i.region];
+                            };
+                            self.productList = res.data;
+                            self.desc = false;
+
+                        }
+                ).catch(function (err) {
+                    if (err.status == 404) {
+                        alert(err.data);
+                        location.reload();
+                    }
+                })
+            },
+            orderbydesc: function (value) {
+                let self = this;
+                self.oderbyValue = value;
+                axios.get("/api/products?Keyword=" + keywordDecode + "&orderbydesc=" + value + "&Region=" + self.regionValue + "&Traveldays=" + self.TraveldaysValue + "&Triptype=" + self.TriptypeValue + "&Rating=lessThan" + self.customerRating)
+                    .then(
+                        function (res) {
+                            for (let i of res.data) {
+                                i.region = self.sectionObject[i.region];
+
+                            };
+                            self.productList = res.data;
+                            self.desc = true;
+                        }
+                    ).catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                            location.reload();
+                        }
+                    })
+            },
+            orderby1: function (value) {
+                let self = this;
+                self.oderbyValue = value;
+                var goTraveltime = self.goTraveltime;
+                if (goTraveltime != "") { goTraveltime = decodeURI(goTraveltime.replace("T", "+").concat(":00.0000000")); }
+                axios.get("/api/products?Keyword=" + keywordDecode + "&orderby=" + value + "&Region=" + self.regionValue + "&Traveldays=" + self.TraveldaysValue + "&Triptype=" + self.TriptypeValue + "&Rating=lessThan" + self.customerRating)
+                    .then(
+                        function (res) {
+                            for (let i of res.data) {
+                                i.region = self.sectionObject[i.region];
+                            };
+                            self.productList = res.data;
+                            self.desc1 = false;
+
+                        }
+                    ).catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                            location.reload();
+                        }
+                    })
+            },
+            orderbydesc1: function (value) {
+                let self = this;
+                self.oderbyValue = value;
+                axios.get("/api/products?Keyword=" + keywordDecode + "&orderbydesc=" + value + "&Region=" + self.regionValue + "&Traveldays=" + self.TraveldaysValue + "&Triptype=" + self.TriptypeValue + "&Rating=lessThan" + self.customerRating)
+                    .then(
+                        function (res) {
+                            for (let i of res.data) {
+                                i.region = self.sectionObject[i.region];
+
+                            };
+                            self.productList = res.data;
+                            self.desc1 = true;
+                        }
+                    ).catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                            location.reload();
+                        }
+                    })
+            },
+            orderby2: function (value) {
+                let self = this;
+                self.oderbyValue = value;
+                var goTraveltime = self.goTraveltime;
+                if (goTraveltime != "") { goTraveltime = decodeURI(goTraveltime.replace("T", "+").concat(":00.0000000")); }
+                axios.get("/api/products?Keyword=" + keywordDecode + "&orderby=" + value + "&Region=" + self.regionValue + "&Traveldays=" + self.TraveldaysValue + "&Triptype=" + self.TriptypeValue + "&Rating=lessThan" + self.customerRating)
+                    .then(
+                        function (res) {
+                            for (let i of res.data) {
+                                i.region = self.sectionObject[i.region];
+                            };
+                            self.productList = res.data;
+                            self.desc2 = false;
+
+                        }
+                    ).catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                            location.reload();
+                        }
+                    })
+            },
+            orderbydesc2: function (value) {
+                let self = this;
+                self.oderbyValue = value;
+                axios.get("/api/products?Keyword=" + keywordDecode + "&orderbydesc=" + value + "&Region=" + self.regionValue + "&Traveldays=" + self.TraveldaysValue + "&Triptype=" + self.TriptypeValue + "&Rating=lessThan" + self.customerRating)
+                    .then(
+                        function (res) {
+                            for (let i of res.data) {
+                                i.region = self.sectionObject[i.region];
+
+                            };
+                            self.productList = res.data;
+                            self.desc2 = true;
+                        }
+                    ).catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                            location.reload();
+                        }
+                    })
+            },
+            //originalpriceClick: function () {
+            //    axios.get("/api/products?orderby=" + orderbyClick).then(function (res) {
+            //        self.productList = res.data;
+            //    })
+            //},
+        },
+        filters: {
+            ellipsis(value) {
+                if (!value) return '';
+                if (value.length > 50) {
+                    return value.slice(0, 50) + '...'//第幾個字加...
+                }
+                return value
+            }
+        },
+
+        //methods: {
+        //    regionClick: function () {
+        //        var self = this;
+        //        var a = self.regionValue;
+        //        if (a == true) {
+        //            a = "0";
+        //            axios.get("/api/products?Region=" + a).then(function (res) {
+        //                self.productList = res.data;
+        //            })
+        //        }
+        //        if (a == false) {
+        //            axios.get("/api/products").then(function (res) {
+        //                self.productList = res.data;
+        //            })
+        //        }
+        //        }
+        //    }
+    });
+</script>

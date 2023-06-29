@@ -1,0 +1,125 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}*/
+
+/*覆蓋bootsrtap的樣式語法*/
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.btn-outline-success, .btn-outline-primary {
+    color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-outline-success:hover, .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #26bec9;
+        border-color: #26bec9;
+    }
+
+.btn-primary {
+    color: #fff;
+    background-color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-primary.active, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:focus, .btn-primary:hover, .open .dropdown-toggle.btn-primary, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+        color: #fff;
+        background-color: #22a7aa;
+        border-color: #22a7aa;
+    }
+
+.btn-blue {
+    background-color: #64b3f4;
+    color: #fff;
+}
+
+    .btn-blue:active, .btn-blue:focus, .btn-blue:hover {
+        background-color: #489add;
+        color: #fff;
+    }
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/*.border-top {
+    border-top: 1px solid #e5e5e5;
+}*/
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 100px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    /*    position: absolute;
+    bottom: 0;*/
+    background-color: dimgray;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    color: #fff;
+}
+
+    .footer a {
+        text-decoration: none;
+/*        color: gray;
+*/    }
+
+        .footer a:hover {
+            text-decoration: underline;
+/*            color: #FFF;
+*/        }

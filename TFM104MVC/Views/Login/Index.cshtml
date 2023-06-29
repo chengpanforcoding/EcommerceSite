@@ -1,0 +1,260 @@
+﻿@{
+    ViewData["Title"] = "會員帳號設定";
+}
+
+<link rel="stylesheet" href="/css/usermanage.css" type="text/css">
+
+<section class="page-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <aside class="page-aside">
+                    <!--page-aside-->
+                    <div class="aside-box text-center">
+                        <!--aside-box-->
+                        <div>
+                            <div class="editor-logo"
+                                 style="background-image: url(https://images.plurk.com/7xffWFcSGWCxhksYH53PN5.png);">
+                                <!--缺相機icon-->
+                            </div>
+                        </div>
+
+                        <h4 class="break-word">@User.Identity.Name</h4>
+                        <p>@User.Claims.Where(x => x.Type == "email").FirstOrDefault().Value</p>
+                        <!--<div class="account-group">
+                        <div class="account gap-2">
+                            <img src="https://imgur.com/MAqZ1Pb.png" style="width: 24px;height: 24px;" class="channel-icon">
+                            <div class="channel-name">
+                                <div>Facebook</div>
+                            </div>-->
+                        <!--缺打勾icon-->
+                        <!--</div>
+                        </div>-->
+                    </div>
+
+                    <!--左下列表-->
+                    <!--page-menu-->
+                    <ul class="page-menu list-item-group">
+                        <li class="list-item active">
+                            <a id="link-account-setting" onclick="location.href='@Url.Action("Index", "Login")'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                     height="16" fill="currentColor" class="bi bi-gear-wide-connected"
+                                     viewBox="0 0 16 16">
+                                    <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z" />
+                                </svg>
+                                <span class="list-item-title">帳號設定</span>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a id="link-account-setting" onclick="location.href='@Url.Action("Manage", "Order")'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                     height="16" fill="currentColor" class="bi bi-stickies" viewBox="0 0 16 16">
+                                    <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z" />
+                                    <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z" />
+                                </svg>
+                                <span class="list-item-title">訂單管理</span>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a id="link-account-setting" href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                     height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                </svg>
+                                <span class="list-item-title">訊息管理</span>
+                            </a>
+                        </li>
+                        <li class="list-item">
+                            <a id="link-account-setting" onclick="location.href='@Url.Action("WishList", "Collect")'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                     height="16" fill="currentColor" class="bi bi-balloon-heart" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z" />
+                                </svg>
+                                <span class="list-item-title">我的收藏</span>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+
+
+            <!--右資訊欄-->
+            <div class="col-md-9" id="EditData">
+                <div class="board">
+                    <div class="page-head">
+                        <h3>帳號設定</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group must">
+                                <label>
+                                    姓
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="form-group">
+                                    <input placeholder="@User.Identity.Name" name="lastName" autocomplete="given-name" type="text" class="form-control" v-model="memberData.lastName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group must">
+                                <label>
+                                    名
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="form-group">
+                                    <input placeholder="名" name="firstName" autocomplete="family-name" type="text" class="form-control" v-model="memberData.firstName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>性別</label>
+                                <select type="text" class="form-control" v-model="memberData.members.gender">
+                                    <option selected="selected" disabled> -請選擇- </option>
+                                    <option v-bind:value="true">男性</option>
+                                    <option v-bind:value="false">女性</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>出生日期</label>
+                                <div class="input-group">
+                                    @*<input placeholder="YYYY-MM-DD" type="text" class="form-control.has-datepicker">*@
+                                    <input type="date" id="birtday" name="birthday"
+                                           value="1918-06-07" min="1918-06-07T00:00" max="2300-06-14T00:00"
+                                           v-model="memberData.members.birthday">
+
+                                    <span class="input-group-addon">
+                                        <i class="bi bi-calendar2-week"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group must">
+                                <label>
+                                    電話號碼
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="form-group">
+                                    <div id="tel-area-wrapper-1" style="position: absolute; height: 100%;">
+                                        <div style="position: absolute; display: flex; justify-content: space-between;
+                                            align-items: center; width: 90px; height: inherit;
+                                            padding: 0 12px; pointer-events: none;">
+                                            <span id="tel-area-label-1">+886</span>
+                                            <i class="bi bi-chevron-down" style="font-size: 10px; color: #999;"></i>
+                                        </div>
+                                        <select id="tel-area-select-1" style="width: 90px; height: inherit; opacity: 0; cursor: pointer;">
+                                            <option value="1">United States of America,Canada (+1)</option>
+                                            <option value="44">United Kingdom (+44)</option>
+                                            <option value="61">Australia (+61)</option>
+                                            <option value="63">Philippines (+63)</option>
+                                            <option value="64">New Zealand (+64)</option>
+                                            <option value="66">Thailand (+66)</option>
+                                            <option value="81">Japan (+81)</option>
+                                            <option value="353">Ireland (+353)</option>
+                                            <option value="380">Ukraine (+380)</option>
+                                            <option value="852">Hong Kong (+852)</option>
+                                            <option value="886">Taiwan (+886)</option>
+                                        </select>
+                                    </div>
+                                    <input type="tel" name="tel" class="form-control" style="padding-left: 90px;" v-model="memberData.phone">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group email-block must">
+                                <label>
+                                    聯絡 E-mail
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="form-group">
+                                    <input placeholder="聯絡 E-mail" name="email" autocomplete="email" type="email" class="form-control" v-model="memberData.account" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <a class="btn btn-primary btn-save" v-on:click="updateMember" style=" color: #fff;">儲存</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--發修改資料api-->
+<script>
+    var MemberData = new Vue({
+        el: '#EditData',
+        data: {
+            memberData: {
+                account: "",
+                lastName: "",
+                firstName: "",
+                phone: "",
+                members: {
+                    birthday: "",
+                    gender: false
+                }
+            }
+        },
+        mounted: function () {
+            this.getUserData();
+        },
+        methods: {
+            updateMember: function () {
+                let self = this;
+                axios.post("/auth/UpdateUserDetail", self.memberData)
+                    .then(
+                        function (res) {
+                            console.log("成功送出資料");
+                            alertSuccess("您已成功更新資料");
+                        }
+                    ).then(function () {
+                        self.getUserData();
+                    });
+            },
+            getUserData: function () {
+                let self = this;
+                axios.get("/auth/getUser").then(
+                    function (res) {
+                        self.memberData = res.data;
+                    }
+                )
+            }
+        },
+    })
+</script>
+
+<!--回頂部btn 暫時隱藏-->
+@*<div class="scroll-top-wrapper">
+        <button type="button" id="BackTop" class="scroll-top-inner" style="float: right;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+            </svg>
+        </button>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#BackTop').click(function () {
+                $('html,body').animate({ scrollTop: 0 }, 333);
+            });
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#BackTop').fadeIn(222);
+                } else {
+                    $('#BackTop').stop().fadeOut(222);
+                }
+            }).scroll();
+        });
+    </script>*@

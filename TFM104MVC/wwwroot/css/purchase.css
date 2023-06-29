@@ -1,0 +1,33 @@
+/*基本設定*/
+
+body {
+    padding-top: 70px;
+}
+
+.container{
+max-width: 800px;
+}
+
+
+/*各看板設定*/
+.board{
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/*麵包屑連結色彩設定*/
+.breadcrumb a {
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+/*立即訂購按鈕設定*/
+.btn-info, .btn-info:hover, .btn-info:active {
+    color: #fff;
+    background-color: #26bec9;
+}

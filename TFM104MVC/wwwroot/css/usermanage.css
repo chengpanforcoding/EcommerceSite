@@ -1,0 +1,303 @@
+
+/*底*/
+        
+.page-wrap{
+    background-color: rgb(245, 245, 245);
+    display: block;
+    box-sizing: border-box;
+    min-height: 61vh;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}  
+
+/*向上卷軸按鈕*/
+.scroll-top-inner{
+    opacity: 40%;
+    background-color: #fff;
+    color: rgb(65, 147, 202);
+    border-style: none;
+    border-radius: 50%;
+    float: right;
+    width: 48px;
+    height: 48px;
+}
+
+/*左資訊欄*/
+
+.card-items{            
+    padding: 15px;
+}
+/*使用者名稱*/
+h4{
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    background: #FFF;
+    color: inherit;
+}
+.break-word{
+    text-align: center!important;
+}
+/*左欄使用者資訊*/
+.page-aside{
+    display: block;
+    box-sizing: border-box;
+}
+.aside-box{
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: .5px;
+    color: #333;
+    margin: auto;
+    overflow-x: hidden;
+}
+.page-aside .aside-box{
+    padding: 5px;
+    background-color: #FFF;
+    border-radius: 6px;
+    text-align: center;
+}
+.page-aside .editor-logo{
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    position: relative;
+    overflow: visible;
+}
+.editor-logo{
+    border-radius: 50%;
+    border: 1px solid #eee;
+    text-align: center;
+    background-color: #eaeaea;
+    background-size: cover;
+    background-position: 50%;
+}
+/*左欄下選單*/
+.page-menu{
+    margin-top: 15px;
+    list-style: none;
+    padding-left: 0;
+    background-color: #FFF;
+    border-radius: 5px;
+    font-family: Noto Sans TC,微軟雅黑,Microsoft Yahei,sans-serif;
+}
+.list-item-group{
+    line-height: 1.5;
+}
+.list-item-group>.list-item>a{
+    display: flex;
+    -webkit-box-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.list-item .list-item-title{
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+}
+li{
+    display: list-item;
+}
+ul li{
+    border: none;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s linear;
+}
+.page-menu li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #eaeaea;
+}
+.page-menu li a:hover {
+    color: #eaeaea;
+}
+/*左下欄icon*/
+#link-account-setting{
+    display: flex;
+    -webkit-box-align: start;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+#link-account-setting svg{
+    margin-right: 6px;
+}
+.page-menu li a{
+    display: block;
+    color: #333;
+    padding: 10px 15px;
+}
+.page-menu li.active a{
+    color: #26bec9;
+    position: relative;
+}
+a, a:focus, a:hover{
+    text-decoration: none;
+}
+/*a{
+    cursor: pointer;    
+    color: #26bec9;
+    transition: .25s;
+    background-color: transparent;
+}*/
+.page-menu li.active a::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 4px;
+    background-color: #26bec9;
+}
+/**{
+    box-sizing: border-box;
+}
+*, ::after, ::before{
+    box-sizing: border-box;
+}*/
+
+/*登入*/
+.page-aside .account-group{
+    border-top: 1px solid #eee;
+    margin: 15px -15px 0;
+    padding: 10px 15px 0;
+}
+.page-aside .account{
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: start;
+    align-items: flex-start;
+    position: relative;
+    margin: 10px;
+    text-align: left;
+    line-height: 1.4;
+    font-family: Noto Sans TC,微軟雅黑,Microsoft Yahei,sans-serif;
+
+}
+
+/*右資訊欄*/
+.page-wrap .board{
+    border: 0;
+    margin-top: 0;
+}
+.board{
+    padding: 10px;
+    background: #FFF;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+.page-head{
+    border-bottom: 1px solid #eaeaea;
+    margin: 0 -20px 20px;
+    padding: 0 20px;
+}
+h3{
+    line-height: 1.5;
+    font-family: inherit;
+    font-weight: 700;
+    margin: 0.67em 0;
+    margin-left: 6px;
+}
+
+.form-group{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.col-md-4{
+    width: 33.3%;
+}
+
+.form-control{
+    width: 100%;
+    height: 45px;
+    padding: 10px 12px;
+    color: #333;
+    font-family: inherit;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    letter-spacing: .5px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    box-shadow: none;
+    opacity: 1;
+}
+
+.form-control, output{
+    display: block;
+    font-size: 14px;
+    color: #555;
+}
+
+input{
+    writing-mode: horizontal-tb;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    cursor: text;
+}
+
+.input-group{
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.input-group .form-group{
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+}
+
+/*日曆*/
+.input-group-addon{
+    background-color: transparent;
+    color: #999;
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    text-align: center;
+    white-space: nowrap;
+}
+.bi-calendar2-week:before{
+    content: "\e075";
+}
+
+/*電話*/
+.bi-chevron-down{
+    font-family: simple-line-icons;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-box-smoothing: antialiased;
+}
+
+ .btn-save {
+    width: 80px;
+    height: 35px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+}
+/*.btn-primary{
+    background-color: #26bec9;
+    color: #fff;
+    float: right;
+    border: none;
+    touch-action: manipulation;
+}
+.btn-primary:hover{
+    color: #fff;
+    background-color: #22a7aa;
+    border-color: #22a7aa;
+}*/

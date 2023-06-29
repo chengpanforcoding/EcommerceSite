@@ -1,0 +1,467 @@
+﻿@{
+    ViewData["Title"] = "購物車";
+}
+
+<link rel="stylesheet" href="/css/shopCart.css" type="text/css">
+
+<div class="container d-block">
+    <!--麵包屑-->
+    <div class="row mt-3">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="fw-bold breadcrumb-item active" aria-current="page">購物車</li>
+                <li class="text-secondary breadcrumb-item">填寫資料與付款</li>
+                <li class="text-secondary breadcrumb-item">訂購完成</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!--購物車本體-->
+<div class="container" id="ShopCart">
+
+    <div class="row">
+        <!--空的購物車-->
+        <div class="empty-cart" v-if="cartList.length ==0">
+            <div class="board d-block align-item-center">
+                <!--購物車標題-->
+                <div class="board-title">
+                    <span class="fs-5 fw-bold">購物車</span>
+                </div>
+                <hr class="text-muted">
+                <div class="d-block text-center">
+                    <div class="mx-auto my-3">
+                        <div class="mx-auto d-block mb-3">
+                            <img src="https://cdn.kkday.com/pc-web/assets/img/empty_state/shopping_cart.svg" width="120"
+                                 height="120">
+                        </div>
+                        <p class="fw-bold text-muted text-center fs-6">您的購物車是空的</p>
+                    </div>
+
+                </div>
+                <div class="d-block text-center">
+                    <button class="btn btn-info mt-3" type="button" onclick="location.href='@Url.Action("Index", "Home")'">
+                        跟著TT一起探索台灣
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--有東西的購物車-->
+        <div class="board main-cart" v-else>
+            <!--購物車標題-->
+            <div class="board-title">
+                <span class="fs-5 fw-bold">購物車</span>
+            </div>
+            <hr class="text-muted">
+            <!--購物車本體-->
+            <div class="container cart-group">
+                <div class="row cart-item" v-for="item in cartList">
+                    <div class="col-1 ckeckbox">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" v-model="selectedProduct" :value="item.id" :id="item.id" name="choice" onclick="setAll()" checked>
+                            <label class="form-check-label" for="flexCheckChecked">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <a href="#">
+                            <img :src="item.productPictures[0].url" style="width:50px;height:50px;">
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a :href="'/ProductView/product/'+ item.id ">
+                            {{item.title}}
+                        </a>
+                    </div>
+                    <div class="col-2">{{item.goTouristTime}}</div>
+                    <div class="col-2">數量x{{item.qty}}</div>
+                    <div class="col-2">
+                        <span class="fw-bold text-info ">
+                            TWD {{item.price * item.qty}}
+                        </span>
+                    </div>
+                    <div class="col-1">
+                        <span>
+                            <a href="javascript:;">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <a v-on:click="deleteCartItem(item.id)">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr class="text-muted">
+
+            <div class=" board-footer">
+                <!--購物車勾選-->
+                <div class=" board-action my-3 ml-3">
+                    <div class="d-flex gap-1 align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" onclick="demo()">
+                            <label class="form-check-label text-muted" for="flexCheckChecked">
+                                <a class="text-muted" href="javascript:;">
+                                    全選(x)
+                                </a>
+                            </label>
+                        </div>
+                        <span class="text-muted">|</span>
+                        <div class="text-muted">
+                            <a href="javascript:;" class="text-muted">
+                                刪除已選項目
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--購物車金額計算&下單-->
+                <div class=" board-cta d-flex justify-content-end">
+                    <div class="cart-total">
+                        <div class="d-flex justify-content-end">
+                            <!--總金額與點數-->
+                            <div class="item">
+                                <!--商品金額-->
+                                <div class="d-flex gap-1 align-items-center">
+                                    <div class="text-muted">
+                                        {{totalCount}}件商品合計
+                                    </div>
+                                    <div class="fw-bold text-info fs-5">
+                                        TWD {{totalPrice}}
+                                    </div>
+                                </div>
+                                <!--點數-->
+                                <div class="d-flex gap-1 align-items-center justify-content-end">
+                                    <div class="text-muted">
+                                        TT Points
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <span class="text-warning">
+                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                        </span>
+                                        <div class="fw-bold text-warning">
+                                            {{ponits}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--下訂btn-->
+                            <div class="item btn">
+                                <div class="d-flex justify-content-end gap-3">
+                                    <button type="button" class="btn btn-info" @@click="send">
+                                        前往結帳
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="container g-0 continue-shop">
+    <a id="continue-shop" class="float-end" onclick="location.href='@Url.Action("Index", "Home")'" style=" color: #26bec9; ">繼續購物></a>
+</div>
+
+<!--你可能也會喜歡-->
+<div class="container cart-recommend mb-5" id="youMayLike">
+    <div class="d-flex justify-content-between mb-3">
+        <span class="fs-5 fw-bold">▎你可能也會喜歡</span>
+    </div>
+    <div class="row">
+        <!--商品單項 直接在最外層加a標籤-->
+        <div class="col-4" v-for="item in productList.slice(0,3)">
+            <a class="text-secondary" v-bind:href=" '/ProductView/product/'+ item.id " target="_blank" rel="noopener">
+                <div class="mb-1">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-12 product-card-image" v-bind:style="'background-image: url( '+item.productPictures[0].url +');'">
+                                <div class="mt-3 d-flex justify-content-between mx-3">
+                                    <!--地點-->
+                                    <div class="d-flex gap-1">
+                                        <span class="text-light">
+                                            <i class="bi bi-geo-alt-fill"></i>
+                                        </span>
+                                        <p><small class="text-light">{{item.region}}</small></p>
+                                    </div>
+                                    <!--收藏愛心 這邊暫時不做a標籤 -->
+                                    <div class="text-light">
+                                        <span class="text-danger"><i class="bi bi-heart"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title mb-3">{{item.title |ellipsis}}</h5>
+                                    </div>
+
+                                    <!--產品資訊：評價&購買數量-->
+                                    <div class="product-info d-flex gap-1">
+                                        <!--評價-->
+                                        <div class="product-star d-flex">
+                                            <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                                            <p><small class="text-muted">{{item.customerRating}}</small></p>
+                                        </div>
+                                        <span class="divider">|</span>
+                                        <!--熱門程度-->
+                                        <div class="prodcut-book d-flex gap-1">
+                                            <span>
+                                                <i class="fas fa-fire text-danger"></i>
+                                            </span>
+                                            <p><small class="text-muted">xxxx個已訂購</small></p>
+                                        </div>
+                                    </div>
+                                    <!--產品資訊：評價&熱門程度&價格-->
+                                    <div class="product-footer d-flex gap-1 ">
+                                        <!--價格-->
+                                        <div class="product-price gap-3">
+                                            <div>
+                                                <p class="fw-bolder">TWD {{item.price}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!--原始樣板：商品單項 直接在最外層加a標籤-->
+        <!--<div class="col-4">
+            <a class="text-secondary" href="#" target="_blank" rel="noopener">
+                <div class="mb-1">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-12 product-card-image" style="background-image: url(https://picsum.photos/150/100);">
+                                <div class="mt-3 d-flex justify-content-between mx-3">-->
+        <!--地點-->
+        <!--<div class="d-flex gap-1">
+            <span class="text-light">
+                <i class="bi bi-geo-alt-fill"></i>
+            </span>
+            <p><small class="text-light">地點</small></p>
+        </div>-->
+        <!--收藏愛心 這邊暫時不做a標籤 -->
+        <!--<div class="text-light">
+                    <span class="text-danger"><i class="bi bi-heart"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title mb-3">商品標題</h5>
+                </div>-->
+        <!--產品資訊：評價&購買數量-->
+        <!--<div class="product-info d-flex gap-1">-->
+        <!--評價-->
+        <!--<div class="product-star d-flex">
+            <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+            <p><small class="text-muted">(星星評價數)</small></p>
+        </div>
+        <span class="divider">|</span>-->
+        <!--熱門程度-->
+        <!--<div class="prodcut-book d-flex gap-1">
+                <span>
+                    <i class="fas fa-fire text-danger"></i>
+                </span>
+                <p><small class="text-muted">xxxx個已訂購</small></p>
+            </div>
+        </div>-->
+        <!--產品資訊：評價&熱門程度&價格-->
+        <!--<div class="product-footer d-flex gap-1 ">-->
+        <!--價格-->
+        <!--<div class="product-price gap-3">
+                                            <div>
+                                                <p class="fw-bolder">TWD X,XXX </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>-->
+    </div>
+</div>
+
+
+<!--發購物車API-->
+<script>
+    var purchaseCarVue = new Vue({
+        el: "#ShopCart",
+        data: {
+            cartList: [],
+            selectedProduct: [],
+            tempRemoveItem: "",
+            removeCartItemList: {
+                productId: ""
+            },
+        },
+        mounted: function () {
+            this.getCurrentUserCart();
+            //this.getProductList();
+        },
+        computed: {
+            totalPrice: function () {
+                return this.cartList.map(x => x.price * x.qty).reduce((now, next) => now + next, 0);
+            },
+            totalCount: function () {
+                return this.cartList.length;
+            },
+            ponits: function () {
+                return Math.floor(this.totalPrice * 0.1);
+            }
+        },
+        methods: {
+            getCurrentUserCart: function () {
+                let self = this;
+                axios.get("/api/Cart/GetFullInfoCart")
+                    .then(function (res) {
+                        if (res.data.length == 0) {
+                            self.cartList.splice(0);
+                        } else {
+                            self.cartList = res.data;
+                        }
+                    })
+                    .catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                        }
+                    });
+            },
+            send: function () {
+                var form = document.createElement("form");
+                form.method = "post";
+                form.action = "/Purchase/Booking"
+
+                for (var i = 0; i < this.selectedProduct.length; i++) {
+                    var inp = document.createElement("input");
+                    inp.type = "text";
+                    inp.name = "productId";
+                    inp.value = this.selectedProduct[i];
+                    form.appendChild(inp);
+                }
+                document.body.appendChild(form);
+                form.submit();
+            },
+            deleteCartItem: function (value) {
+                this.tempRemoveItem = value;
+                this.removeCartItem();
+            },
+            removeCartItem: function () {
+                let self = this;
+                self.removeCartItemList.productId = self.tempRemoveItem;
+                //console.log(self.removeCartItemList);
+                axios.post("/api/cart/removecart", self.removeCartItemList)
+                    .then(function (res) {
+                        if (res.status == 204) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '您已成功刪除商品',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    purchaseCarVue.getCurrentUserCart();
+                                    //window.location.href = "/home/index";
+
+                                }
+                            });
+                        }
+                    })
+            }
+
+        }
+    })
+</script>
+
+<!--你可能也喜歡-->
+<script>
+    var yML = new Vue({
+        el: "#youMayLike",
+        data: {
+            productList: [],
+            err: "",
+            pic: [],
+            sectionObject: {
+                "North": "北北基",
+                "MiddleNorth": "桃竹苗",
+                "Middle": "中彰投",
+                "MiddleSouth": "雲嘉南",
+                "South": "高屏",
+                "East": "宜花東",
+                "OutsideIsland": "離島地區"
+            },
+        },
+        mounted: function () {
+            this.getProductList();
+        },
+        methods: {
+            getProductList: function () {
+                let self = this;
+
+                axios.get("/api/products")
+                    .then(function (res) {
+                        self.productList = res.data;
+                        self.pic = res.data.productPictures;
+                        for (let i of res.data) {
+                            i.region = self.sectionObject[i.region];
+                        }
+                    }).catch(function (err) {
+                        if (err.status == 404) {
+                            alert(err.data);
+                        }
+                    });
+            }
+        },
+        filters: {
+            ellipsis(value) {
+                if (!value) return '';
+                if (value.length > 20) {
+                    return value.slice(0, 20)  //第幾個字加...
+                }
+                return value;
+            }
+        },
+    })
+</script>
+
+
+<!--checkbox全選-->
+<script>
+    //點選全選，子複選框被選中
+    function demo() {
+        var allcheck = document.getElementById("flexCheckChecked");
+        var choice = document.getElementsByName("choice");
+        for (var i = 0; i < choice.length; i++) {
+            choice[i].checked = allcheck.checked;
+        }
+    }
+
+    //點選子複選框,全選框 選中、取消
+    function setAll() {
+        if (!$(".form-check-input").checked) {
+            $("#flexCheckChecked").prop("checked", false); // 子複選框某個不選擇，全選也被取消
+        }
+        var choicelength = $("input[type='checkbox'][class='form-check-input']").length;
+        var choiceselect = $("input[type='checkbox'][class='form-check-input']:checked").length;
+
+        if (choicelength == choiceselect) {
+            $("#flexCheckChecked").prop("checked", true);   // 子複選框全部部被選擇，全選也被選擇；1.對於HTML元素我們自己自定義的DOM屬性，在處理時，使用attr方法；2.對於HTML元素本身就帶有的固有屬性，在處理時，使用prop方法。
+        }
+
+    }
+
+</script>

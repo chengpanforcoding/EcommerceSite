@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewData["Title"] = "訂單明細";
+}
+
+<link rel="stylesheet" href="/css/orderDetail.css" type="text/css">
+
+
+<div class="container mt-3 mb-5" id="orderDetailVue">
+    <div class="row">
+
+        <!--左功能列表-->
+        <div class="col-md-3">
+            <div class="card shadow">
+                <a v-bind:href="'/ProductView/product/'+ orderDetails.productId ">
+                <img :src="orderDetails.product.productPictures[0].url" class="card-img-top">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title" id="product">{{orderDetails.product.title}}</h5>
+                    <p class="card-date" id="date-time">出發日期：{{orderDetails.product.goTouristTime}}</p>
+                    <p class="discount">數量*{{orderDetails.quantity}}</p>
+                </div>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="card-price">
+                            <p class="price-title">實際付款金額</p>
+                            <p class="price-td">TWD {{orderDetails.product.price * orderDetails.quantity}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--右訂單明細欄-->
+        <div class="col-md-9">
+            <div class="board shadow">
+                <div class="card-lt">
+                    <div class="order-title">
+                        <div>
+                            <a href="javascript:void(0);" class="btn" id="btn_1" role="button" data-bs-toggle="button">
+                                <p>聯絡客服</p>
+                            </a>
+                        </div>
+                        <h4>訂單編號 #{{orderDetails.orderId}}</h4>
+                        <p>訂購人姓名：{{orderInfo[0].name}}</p>
+                        <div>
+                            <a href="javascript:void(0);" class="btn" id="btn_2" role="button" data-bs-toggle="button">
+                                <p>給予評價</p>
+                            </a>
+                        </div>
+                        <p>電子郵件：{{orderInfo[0].email}}</p>
+                        <p>連絡電話：{{orderInfo[0].phone}}</p>
+                        <p>訂購日期：{{orderInfo[0].date}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--回頂部-->
+@*<div class="scroll-top-wrapper">
+        <button type="button" id="BackTop" class="scroll-top-inner" style="float: right;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-up-circle"
+                 viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+            </svg>
+        </button>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#BackTop').click(function () {
+                $('html,body').animate({ scrollTop: 0 }, 333);
+            });
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#BackTop').fadeIn(222);
+                } else {
+                    $('#BackTop').stop().fadeOut(222);
+                }
+            }).scroll();
+        });
+    </script>*@
+
+
+<script>
+    var url = location.pathname;
+    console.log(url);
+    var orderPid = url.replace("/Order/Detail/", ""); //字元處理 移除"/Order/Detail/" 字串
+    console.log(orderPid);
+    var orderId = orderPid.split("/")[0];
+
+    var apporder = new Vue({
+        el: '#orderDetailVue',
+        data: {
+            orderDetails: [],
+            orderInfo:[]
+        },
+        mounted: function () {
+            this.getOrderInfo();
+            this.getOrderDetails();
+        },
+        computed: {
+            orderPrice: function () {
+                return this.orders.orderdetail.unitPrice * this.orders.orderdetails.quantity * this.orders.orderdetails.discountPersent
+            }
+        },
+        methods: {
+            getOrderDetails: function () {
+                let self = this;
+                axios.get("/api/Orders/" + orderPid).then(function (res) {
+                    self.orderDetails = res.data;
+                    console.log(self.orderDetails);
+                })
+                    .catch(function (err) {
+                        if (err.status == 404) {
+                            alertWrong  (err.data);
+                        }
+                    })
+            },
+            getOrderInfo: function () {
+                let self = this;
+                axios.get("/api/Orders/manage/" + orderId)
+                    .then(function (res) {
+                        self.orderInfo = res.data;
+                    })
+            }
+        }
+    })
+</script>

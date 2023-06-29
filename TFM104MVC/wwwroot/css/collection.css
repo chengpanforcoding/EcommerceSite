@@ -1,0 +1,281 @@
+
+/*底*/
+.page-wrap {
+    background-color: rgb(245, 245, 245);
+    display: block;
+    box-sizing: border-box;
+    min-height: 61vh;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+/*向上卷軸按鈕*/
+.scroll-top-inner {
+    opacity: 40%;
+    background-color: #fff;
+    color: rgb(65, 147, 202);
+    border-style: none;
+    border-radius: 50%;
+    float: right;
+    width: 48px;
+    height: 48px;
+}
+
+/*左資訊欄*/
+
+.card-items {
+    padding: 15px;
+}
+/*使用者名稱*/
+h4 {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    background: #FFF;
+    color: inherit;
+}
+
+.break-word {
+    text-align: center !important;
+}
+/*左欄使用者資訊*/
+.page-aside {
+    display: block;
+    box-sizing: border-box;
+}
+
+.aside-box {
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: .5px;
+    color: #333;
+    margin: auto;
+    overflow-x: hidden;
+}
+
+.page-aside .aside-box {
+    padding: 5px;
+    background-color: #FFF;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.page-aside .editor-logo {
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    position: relative;
+    overflow: visible;
+}
+
+.editor-logo {
+    border-radius: 50%;
+    border: 1px solid #eee;
+    text-align: center;
+    background-color: #eaeaea;
+    background-size: cover;
+    background-position: 50%;
+}
+/*左欄下選單*/
+.page-menu {
+    margin-top: 15px;
+    list-style: none;
+    padding-left: 0;
+    background-color: #FFF;
+    border-radius: 5px;
+    font-family: Noto Sans TC,微軟雅黑,Microsoft Yahei,sans-serif;
+}
+
+.list-item-group {
+    line-height: 1.5;
+}
+
+    .list-item-group > .list-item > a {
+        display: flex;
+        -webkit-box-align: start;
+        align-items: flex-start;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+.list-item .list-item-title {
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+}
+
+li {
+    display: list-item;
+}
+
+ul li {
+    border: none;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s linear;
+}
+
+    ul li:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #eaeaea;
+    }
+
+    ul li a:hover {
+        color: #eaeaea;
+    }
+/*左下欄icon*/
+#link-account-setting {
+    display: flex;
+    -webkit-box-align: start;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+    #link-account-setting svg {
+        margin-right: 6px;
+    }
+
+.page-menu li a {
+    display: block;
+    color: #333;
+    padding: 10px 15px;
+}
+
+.page-menu li.active a {
+    color: #26bec9;
+    position: relative;
+}
+
+.list-item a, a:focus, a:hover {
+    text-decoration: none;
+}
+
+.card-name a, a:focus, a:hover {
+    text-decoration: none;
+}
+
+.page-menu li.active a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 4px;
+    background-color: #26bec9;
+}
+/*通用(?)*/
+* {
+    box-sizing: border-box;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+/*登入*/
+.page-aside .account-group {
+    border-top: 1px solid #eee;
+    margin: 15px -15px 0;
+    padding: 10px 15px 0;
+}
+
+.page-aside .account {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: start;
+    align-items: flex-start;
+    position: relative;
+    margin: 10px;
+    text-align: left;
+    line-height: 1.4;
+    font-family: Noto Sans TC,微軟雅黑,Microsoft Yahei,sans-serif;
+}
+/*右資訊欄主體*/
+.page-wrap .board {
+    border: 0;
+    margin-top: 0;
+}
+
+.board {
+    padding: 10px;
+    background: #FFF;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.page-head {
+    border-bottom: 1px solid #eaeaea;
+    margin: 0 -20px 20px;
+    padding: 0 20px;
+}
+/*文字*/
+h3 {
+    line-height: 1.5;
+    font-family: inherit;
+    font-weight: 700;
+    margin: 0.67em 0;
+    margin-left: 6px;
+}
+
+.subtitle {
+    margin-left: 3px;
+    color: #26bec9;
+}
+
+.sub {
+    margin-left: 5px;
+    color: #333;
+}
+
+.subtitle p {
+    display: inline-block;
+    text-align: left;
+}
+
+h5 {
+    font-size: 1.1em;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/*右欄卡片*/
+.card-body {
+    text-align: left;
+}
+
+.card-text {
+    font-size: 0.85em;
+    color: #666;
+}
+/*下拉選單*/
+.btn:hover {
+    background-color: #FFF;
+    color: #333;
+}
+
+.downlist {
+    display: block;
+    float: right;
+}
+/*收藏愛心*/
+.card-title svg {
+    color: red;
+    float: right;
+    position: relative;
+}
+/*評價星星*/
+.star {
+    color: #26bec9;
+}
+
+.card-footer {
+    vertical-align: bottom;
+    background-color: #fff;
+    border: none;
+    padding-top: 65px;
+}
+

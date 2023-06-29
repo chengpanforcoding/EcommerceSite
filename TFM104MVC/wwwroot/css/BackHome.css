@@ -1,0 +1,92 @@
+
+/*麵包屑的樣式修改*/
+.breadcrumb {
+    color: #3c4554;
+    background-color: #e9edf2;
+    padding-top: 0.5rem;
+}
+
+.breadcrumb  a {
+    color: #3c4554;
+    text-decoration: none;
+}
+
+.breadcrumb  a:hover {
+    color: #5b7ce3;
+    text-decoration: none;
+}
+
+/*訂單數量*/
+.infobox {
+    border: none;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: #FFF;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: #74819A;
+}
+
+.infobox-data{
+    display: inline-block;
+    border: 0;
+    border-top-width: 0;
+    text-align: left;
+    line-height: 21px;
+    min-width: 130px;
+    padding-left: 8px;
+    position: relative;
+    top: 0;
+}
+
+.infobox-data-number, .infobox-amount{
+    font-size: 24px;
+}
+
+
+.infobox-block {
+    border: none;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: #FFF;
+    font-size: 0.8rem;
+}
+
+.infobox-green{
+    background-color: #5cb85c;
+}
+
+.infobox-blue{
+    background-color: #579edf;
+}
+
+.infobox-blue2{
+    background-color: #00c7d3;
+}
+
+/* .infobox-icon{
+    /* position: absolute;
+    right: 2rem;
+    top: 1rem; */
+    /* border-radius: 0;
+    text-shadow: none;
+    color: #74819A;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 15px;
+    padding: 3px 6px; }
+     */
+
+     /*最近訂單一覽*/
+
+     .row table{
+        max-width: 980px;
+        margin-left: 1rem;
+        padding: 20px;
+        border: 1px solid #ebeff7;
+        border-radius: 5px;
+        box-shadow: 0 0 4px 0 rgb(0 0 0 / 30%);
+        background-color: #fff;
+        color: #2b303a;
+        font-weight: initial;
+     }

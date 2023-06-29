@@ -1,0 +1,95 @@
+/*面板區塊設定*/
+.item {
+    background-color: white;
+    border-radius: 5px;
+    border-color: azure;
+    /* border: 1px solid gray; */
+    margin-bottom: 5%;
+    padding: 5%;
+}
+
+.filter-block {
+    background-color: white;
+    border-radius: 5px;
+    border-color: azure;
+    /* border: 1px solid gray; */
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+}
+
+/* .filter > a, a:hover, a:visited, a:link, a:active {
+    color:#000;
+    text-decoration:none;
+    outline: none;
+} */
+
+
+
+/*商品圖片設定*/
+.product-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*--------------------------------*/
+
+/*連結色彩設定*/
+
+/*麵包屑*/
+.breadcrumb a {
+    text-decoration: none;
+    color: #26bec9;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+/*篩選排序器連結色彩設定*/
+.filter-link  a{
+    text-decoration: none;
+    color: #26bec9;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+.filter-link a:hover {
+    text-decoration: underline;
+}
+
+/*--------------------------------*/
+
+.card{
+    max-height:250px;
+}
+
+.card a {
+    text-decoration: none;
+    color: black;
+}
+
+/*設定商品分頁的連結色彩*/
+.page-link:hover {
+    color: #999;
+    border-color: #e6e6e6;
+    text-decoration: none;
+    background-color: #e9ecef;
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #26bec9;
+    border-color: #26bec9;
+}
+
+.page-link {
+    color: #999;
+    border-color: #e6e6e6;
+}

@@ -1,0 +1,28 @@
+/*所有商品的樣式設定*/
+
+.product-list-body {
+    padding: 20px;
+    border: 1px solid #ebeff7;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 30%);
+    background-color: #fff;
+    color: #2b303a;
+    font-weight: initial;
+    /* width: 500px;
+    height: 400px; */
+}
+
+.btn-group .btn-primary{
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border: 1px solid #d6dff2;
+    color: #8e99ad;
+    font-size: 14px;
+    height: 40px;
+    margin-bottom: 0;
+    /* padding: 8px 16px; */
+    position: relative;
+    /* width: 200px; */
+}
+

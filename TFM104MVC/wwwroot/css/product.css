@@ -1,0 +1,220 @@
+/*body背景&底部設定*/
+
+body {
+    background-color: white;
+    padding-bottom: 70px;
+}
+
+/*---------------------------*/
+
+/*測試用設定*/
+
+/*.container {
+     background-color: azure; 
+    background-color: white;
+    border-radius: 5px;
+        border-color: black;
+    border: 1px solid gray; 
+    margin-bottom: 30px;
+    padding: 1%;
+}*/
+/*.item {
+    background-color: white;
+    border-radius: 5px;
+    border-color: azure;
+    border: 1px solid gray;
+    margin-bottom: 5%;
+    padding: 5%;
+}*/
+
+/*---------------------------*/
+
+/*商品下訂區塊設定*/
+.order-block {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+/*方案選擇整體背景區塊*/
+.product-overview {
+    background-color: #f5f5f5;
+    padding: 3%;
+}
+
+
+/*方案選擇區塊設定*/
+.option-item {
+    background-color: white;
+    padding-top: 3%;
+    padding-bottom: 5%;
+    border-radius: 5px;
+}
+
+/*---------------------------*/
+
+/*連結色彩設定*/
+/*a, a:hover {
+    text-decoration: none;
+    color: #26bec9;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }*/
+
+/*麵包屑連結色彩設定*/
+
+.breadcrumb a, .breadcrumb a:hover {
+    text-decoration: none;
+    color: #26bec9;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+/*更多評價連結色彩設定*/
+
+#lastReview a, #lastReview a:hover {
+    text-decoration: none;
+    color: #26bec9;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+    #lastReview a:hover {
+        text-decoration: underline;
+    }
+
+/*快速目錄的連結色彩設定*/
+.nav-link {
+    cursor: pointer;
+    color: #666;
+}
+
+    .nav-link:focus, .nav-link:hover {
+        color: #26bec9;
+        cursor: pointer;
+    }
+
+/*---------------------------*/
+
+
+/*客人評價區塊設定*/
+.review-item {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    padding: 5%;
+}
+
+/*這邊沒有用到設定*/
+
+/*.btn-outline-success {
+    color: #26bec9;
+    border-color: #26bec9;
+}
+
+    .btn-outline-success:hover {
+        color: #fff;
+        background-color: #26bec9;
+        border-color: #26bec9;
+    }*/
+
+/*.btn-outline-success:hover, .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #26bec9;
+    border-color: #26bec9;
+}*/
+
+/*立即訂購按鈕設定*/
+.btn-info, .btn-info:hover {
+    color: #fff;
+}
+
+/*設定評價區塊的下拉選單*/
+
+.dropdown > .btn {
+    border: 1px solid #333333;
+}
+
+/*設定評價分頁的連結色彩*/
+
+.page-link:hover {
+    color: #999;
+    border-color: #e6e6e6;
+    text-decoration: none;
+    background-color: #e9ecef;
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #26bec9;
+    border-color: #26bec9;
+}
+
+
+.page-link {
+    color: #999;
+    border-color: #e6e6e6;
+}
+
+/* .bottom-nav{
+  margin-left: 1%;
+  margin-right: 1%;
+} */
+
+/*設定你可能會喜歡的商品區塊*/
+
+.product-card-image {
+    height: 150px;
+    background-color: #eaeaea;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 6px;
+    -webkit-transition: -webkit-transform .8s ease 0s,-webkit-transform .8s ease 0s;
+    transition: -webkit-transform .8s ease 0s,-webkit-transform .8s ease 0s;
+    transition: transform .8s ease 0s,transform .8s ease 0s;
+    transition: transform .8s ease 0s,transform .8s ease 0s,-webkit-transform .8s ease 0s,-webkit-transform .8s ease 0s;
+    z-index: 1;
+}
+
+.product-info {
+    font-size: 10px;
+}
+
+.row a {
+    text-decoration: none;
+}
+
+/*商品輪播區塊圖片高度設定*/
+.carousel-item {
+    height: 400px;
+/*    margin: 0;
+    padding: 0;*/
+}
+
+.carousel-item img {
+    /*        margin: 0;
+        padding: 0;*/
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*.carousel-item > .w-100 {
+        width: 100% !important;*/
+/*        height: 75vh;
+*/ /*max-height: 300px;
+    }*/

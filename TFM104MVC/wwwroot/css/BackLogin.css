@@ -1,0 +1,86 @@
+
+body {
+/*    background-color: #34425A;
+*/    background-color: #E9EDF2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+span {
+    font-weight: bold;
+    float: left;
+}
+
+.container {
+    padding: 35px;
+}
+
+.col-md-6 {
+    background: #fff;
+}
+
+.form-sighin {
+    width: 100%;
+    max-width: 350px;
+    padding-top: 60px;
+    margin: auto;
+    box-shadow: 1px gray;
+    vertical-align: middle;
+    text-align: center;
+}
+
+    .form-sighin input {
+        margin-bottom: 2px;
+        margin-top: 3px;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 0;
+        max-height: 45px;
+        margin-bottom: 25px;
+    }
+
+.form-control {
+    display: block;
+    width: 100%;
+    color: black;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #666;
+    appearance: none;
+    border-radius: 0.25rem;
+}
+
+.form-floating > label {
+    font-size: 1em;
+    color: #aaa;
+    padding: 2.2rem 0.75rem;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+/*按鈕*/
+.btn-primary {
+    width: 350px;
+    /*    background-color: #26bec9;
+*/ background-color: #6764F4;
+    border: none;
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        /*background-color: #20a4ad;*/
+        background-color: #64B3F4;
+    }
+
+.checkbox {
+    text-align: left;
+}

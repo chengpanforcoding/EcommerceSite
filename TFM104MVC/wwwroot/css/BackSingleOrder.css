@@ -1,0 +1,175 @@
+
+
+/*麵包屑*/
+.breadcrumb {
+    /*background-color: transparent;*/
+    color: #3c4554;
+    background-color: #e9edf2;
+    padding-top: 0.5rem;
+}
+
+    .breadcrumb a {
+        color: #3c4554;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        .breadcrumb a:hover {
+            color: #5b7ce3;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+/*按鈕設定*/
+.btn-outline-primary {
+    color: #5b7ce3;
+    border-color: #5b7ce3;
+}
+
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #5b7ce3;
+        border-color: #5b7ce3;
+    }
+
+.btn-primary {
+    color: #fff;
+    background-color: #5b7ce3;
+    border-color: #5b7ce3;
+}
+
+    .btn-primary.active, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:focus, .btn-primary:hover, .open .dropdown-toggle.btn-primary, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+        color: #fff;
+        background-color: #5b7ce3;
+    }
+
+
+
+/*navUser連結設定*/
+
+.navUser a, .navUser a:hover {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    background-color: transparent;
+    transition: .25s;
+}
+
+.nav-item > a > .btn {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.list-group-item p {
+    padding: 0;
+    margin: 0;
+}
+
+.list-group-item-action:focus, .list-group-item-action:hover {
+    z-index: 1;
+    color: #495057;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+/***右欄***/
+.page-title {
+    display: flex;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #666;
+}
+
+h5 {
+    padding-top: 10px;
+    padding-left: 20px;
+    color: #666;
+    font-size: 1rem;
+}
+
+/*按鈕*/
+.btn-group {
+    float: right;
+    transform: translateY(-50px);
+}
+
+.btn-warning {
+    background-color: #666;
+    border-color: #666;
+    color: #fff;
+}
+
+    .btn-warning:hover {
+        background-color: #333;
+        border-color: #333;
+        color: #f2f6fc;
+    }
+
+/*表格*/
+table {
+    position: relative;
+}
+
+    table > thead {
+        background-color: rgb(194, 202, 222);
+    }
+
+.table-striped {
+    font-size: 0.85em;
+    margin-top: 15px;
+}
+
+.product-name {
+    font-size: 14px;
+    color: #5b7ce3;
+    font-weight: 200;
+}
+
+.discount-name {
+    color: red;
+    font-weight: 200;
+    font-size: 12px;
+}
+
+.tb-title {
+    float: left;
+    font-size: 1em;
+    color: orange;
+}
+
+th {
+    font-weight: 200;
+}
+
+/*貨款*/
+.pay-title > p {
+    color: #666;
+    border-bottom: 1px solid #666;
+}
+
+.pat-tab {
+    font-size: 13px;
+}
+
+.col-2 {
+    font-weight: 100;
+}
+
+.col-1 {
+    text-align: right;
+    color: #5b7ce3;
+    font-weight: 100;
+}
+
+/*購買人資訊*/
+.pay-detail {
+    margin-top: 25px;
+}
+
+    .pay-detail > p {
+        color: #555;
+        border-bottom: 1px solid #555;
+    }
+
+.pay-name {
+    font-size: 14px;
+}

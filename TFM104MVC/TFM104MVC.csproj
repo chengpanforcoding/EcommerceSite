@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Content Remove="wwwroot\ProductPictures\0006b38f-4b2b-4fe4-b50c-3dffdec008d32.png" />
+    <Content Remove="wwwroot\ProductPictures\351d9b78-2b54-454d-8dde-7420c2f34a4fcapture.png" />
+    <Content Remove="wwwroot\ProductPictures\5607dbd6-e459-4964-89fe-ef91eafd371bPXL_20210827_043411488.jpg" />
+    <Content Remove="wwwroot\ProductPictures\608220b9-3d76-4c6f-b6b5-4789c50986b5PXL_20210827_044709347-scaled.jpg" />
+    <Content Remove="wwwroot\ProductPictures\7084e9e1-f82d-482c-90ad-82f74a02fb58IMG_5370.JPG" />
+    <Content Remove="wwwroot\ProductPictures\792e70f0-f95a-472c-8035-335881382533PXL_20210827_043950597-scaled.jpg" />
+    <Content Remove="wwwroot\ProductPictures\882696bb-6a1f-4e61-96a6-88464f8bfe24save.png" />
+    <Content Remove="wwwroot\ProductPictures\893a5e39-58af-411c-b4e8-83d67eef9f3carticle-5d8a397617766.jpg" />
+    <Content Remove="wwwroot\ProductPictures\9521e539-ad45-45a8-acc8-3e0bf4a0a0dcimage_6483441.JPG" />
+    <Content Remove="wwwroot\ProductPictures\9dd88c26-d73f-440a-9528-b457867accb0capture.png" />
+    <Content Remove="wwwroot\ProductPictures\b0275e64-93cf-4b8d-b18c-7fd043cd9b0ecapture.png" />
+    <Content Remove="wwwroot\ProductPictures\c39a3373-0b5f-4de3-bed6-2eb90518ff7e1.png" />
+    <Content Remove="wwwroot\ProductPictures\cf5ea587-87f3-4886-895e-b553abc10fe0article-5d8a397617766.jpg" />
+    <Content Remove="wwwroot\ProductPictures\d6fac5cc-845a-42d0-a6ad-1e9f73d4634barticle-5d8a397617766.jpg" />
+    <Content Remove="wwwroot\ProductPictures\dfa54df4-dacb-4ad2-9c6b-da776947adc7avengers_wp_ironman_1920x1080.jpg" />
+    <Content Remove="wwwroot\ProductPictures\e77dae2f-6253-46e5-aeca-73597969d223PXL_20210827_043411488.jpg" />
+    <Content Remove="wwwroot\ProductPictures\eb9d72c4-3371-47f7-bba3-64a5782c3aacimage_6483441.JPG" />
+    <Content Remove="wwwroot\ProductPictures\ff878fd8-8571-4e2c-9cd9-920967b434c5IMG_5370.JPG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MailKit" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.13" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MimeKit" Version="3.2.0" />
+    <PackageReference Include="stateless" Version="5.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\ProductPictures\" />
+  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+</Project>

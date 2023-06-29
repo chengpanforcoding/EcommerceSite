@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TFM104MVC-旅遊電商</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!--bootstrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--bootstrap js bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!--fontawesome-->
+    <!-- <script src="https://kit.fontawesome.com/c313a8a456.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384–5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <!--vue-->
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>*@
+    <!--vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!--axios-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.js' integrity='sha512-Kg0CewqPNO/ziOJuCq5eyl3P/V6OLz/Lb1I2m+yKS3lHZcGVFN/KOew18rWP+kTsL7haYdaqGjwHQCZrN0heLQ==' crossorigin='anonymous'></script>
+    <!--sweetAlert-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--我硬幹ㄉcss-->
+    <link rel="stylesheet" href="/css/header.css" type="text/css">
+    <!--字體fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="ano nymous">
+</head>
+
+<body>
+    <!--共同版面Header-->
+    <header>
+        <div class="container">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/pic/newest_logo.png" style="width:150px;"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                        <form class="d-flex" action="/ProductView/productlist">
+                            <input name="keyword" class="form-control me-2" type="search" placeholder="探索全台行程活動" aria-label="Search">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                        <div class=" d-flex align-items-center ">
+                            <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-3 ali">
+                                <!-- 商品列表 -->
+                                <li class="nav-item dropdown">
+                                    <div class="product-list-click">
+                                        <a onclick="location.href='@Url.Action("productlist", "ProductView")'">
+                                            商品列表
+                                        </a>
+                                    </div>
+                                </li>
+                                <!-- 購物車 -->
+                                <li class="nav-item dropdown">
+                                    <div class="shop-cart">
+                                        <a class="btn" data-bs-toggle="offcanvas" v-on:click="getCurrentUserCart" href="#offcanvasShopCart" role="button" aria-controls="offcanvasShopCart">
+                                            <i class="bi bi-cart2 fs-5"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                                <!--沒登入的畫面：登入註冊-->
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="nav-item" data-bs-toggle="modal" data-bs-target="#login">
+                                        <a class="nav-link" name="mylogin" href="javascript:void(0);">登入/註冊</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <!--登入的畫面：會員頭像-->
+                                    <li class="nav-item" data-bs-toggle="modal" data-bs-target="#Userlogin">
+                                        <a id="memberLogin" class="btn" data-bs-toggle="offcanvas" href="#offcanvasFUserLogin" role="button" aria-controls="offcanvasFUserLogin">
+                                            <i class="bi bi-person-circle fs-5"></i>
+                                            @*<img src="/pic/login_member.png" class="rounded-circle img-fluid" style="width:25x;height:25px;">*@
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!--會員登入後的畫面-->
+        <!--會員登入offcanva-->
+        <div class="navUser offcanvas offcanvas-end" tabindex="-1" id="offcanvasFUserLogin" aria-labelledby="offcanvasFUserLogin">
+            <div class="list-group">
+                <div class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <div class="">
+                        <a onclick="location.href='@Url.Action("Index", "Login")'">
+                            <img v-bind:src="url" class="rounded-circle img-fluid" style="width:35px;">
+                            @*<i class="bi bi-person-circle fs-4"></i>*@
+                            <span class="offcanvas-title " id="offcanvasUser">
+                                <span> @User.Identity.Name</span>
+                                <i class="bi bi-gear"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button> -->
+                </div>
+                <div class="list-group-item list-group-item-action">
+                    <a href="javascript:void(0);" class="d-flex gap-2" aria-current="true">
+                        <i class="bi bi-ticket-perforated fs-5"></i>
+                        <span>
+                            TT折扣券
+                        </span>
+                    </a>
+                </div>
+                <div class="list-group-item list-group-item-action">
+                    <a href="javascript:void(0);" class="d-flex gap-2">
+                        <i class="bi bi-exclamation-circle-fill fs-5"></i>
+                        <span class="">
+                            TT Points
+                        </span>
+                    </a>
+                </div>
+                <div class="list-group-item list-group-item-action">
+                    <a onclick="location.href='@Url.Action("Manage", "Order")'" class="d-flex gap-2">
+                        <i class="bi bi-card-list fs-5"></i>
+                        <span>
+                            訂單管理
+                        </span>
+                    </a>
+                </div>
+                <div class="list-group-item list-group-item-action">
+                    <a onclick="location.href='@Url.Action("WishList", "Collect")'" class="d-flex gap-2">
+                        <i class="bi bi-heart"></i>
+                        <span>
+                            我的收藏
+                        </span>
+                    </a>
+                </div>
+                <div class="list-group-item list-group-item-action">
+                    <a href="" v-on:click.prevent="logout">
+                        <p class="text-center">
+                            登出
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--以下是購物車的功能-->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasShopCart" aria-labelledby="offcanvasShopCart">
+            <!--空購物車畫面：NavShopCart-empty-->
+            <div v-if="cartList.length ==0">
+                <div class="list-group my-3">
+                    <div class="mx-auto d-block">
+                        <img src="https://cdn.kkday.com/pc-web/assets/img/empty_state/shopping_cart.svg" width="120" height="120">
+                    </div>
+                    <p class="text-muted text-center fs-6">您的購物車是空的</p>
+                </div>
+                <div class="list-group-item list-group-item-action d-flex justify-content-between">
+                    <span>共0件商品</span>
+                    <a id="watchcart1" class="btn btn-primary" style="color:white;" v-on:click="checkUserLogin">
+                        查看購物車
+                    </a>
+                </div>
+            </div>
+            <!--有商品的購物車：NavShopCar-->
+            <div class="list-group" v-else>
+                <div class="list-group-item list-group-item-action">
+                    <div v-for="item in cartList">
+                        <!--商品單項標題-->
+                        <div class="d-flex gap-3">
+                            <!--商品單項-->
+                            <div class="mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-3">
+                                        <!--商品圖片-->
+                                        <div class="product-pic w-80 h-50">
+                                            <img v-bind:src="item.productPictures[0].url"
+                                                 class="w-100 img-fluid rounded-start product-pic">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <!--商品標題-->
+                                            <div class="d-flex gap-3">
+                                                <span class="card-title mb-3 fs-6 fw-bold">{{item.title}}</span>
+                                                <a href="javascript:void(0);" v-on:click="deleteCartItem(item.id)" data-bs-toggle="modal" data-bs-target="#deleteProduct">
+                                                    <i class="bi bi-trash3"></i>
+                                                </a>
+                                            </div>
+                                            <!--日期&人數-->
+                                            <div class="d-flex justify-content-between">
+                                                <!--日期-->
+                                                <div class="d-flex gap-1">
+                                                    <span class="text-muted"><i class="bi bi-calendar"></i></span>
+                                                    <p>
+                                                        <small class="text-muted">{{item.goTouristTime}}</small>
+                                                    </p>
+                                                </div>
+                                                <!--商品數-->
+                                                <div class="d-flex gap-1">
+                                                    <span class="text-muted">
+                                                        <i class="bi bi-cart2 fs-5"></i>
+                                                    </span>
+                                                    <p>
+                                                        <small class="text-muted">{{item.qty}}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!--價格-->
+                                            <div class="d-flex gap-1">
+                                                <span class="fw-bold text-info fs-6">TWD {{item.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="text-muted" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--總商品數量-->
+                <div class="list-group-item list-group-item-action d-flex justify-content-between" id="cartCount">
+                    <span>共{{totalCount}}件商品</span>
+                    <a id="watchcart2" class="btn btn-primary" style="color:white;" v-on:click="checkUserLogin">
+                        查看購物車
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- Modal 刪除商品-->
+    <div class="modal fade" id="deleteProduct" tabindex="-1" aria-labelledby="deleteProduct" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteProduct">刪除商品</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span>
+                        您確定要刪除所選商品嗎？
+                    </span>
+                    <div class="d-flex gap-3 justify-content-end">
+                        <div>
+                            <a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close">取消</a>
+                        </div>
+                        <button v-on:click="removeCartItem" type="button" class="btn btn-danger">刪除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--以下是未登入的功能-->
+    <!-- Modal 登入-->
+    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">登入</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="text-center fw-bold">使用社交平台帳戶登入</div>
+                        <div class="text-center">立即登入，隨時收到獨家優惠</div>
+
+                        <div class="d-flex flex-row justify-content-center" id="oauth">
+                            <div class="">
+                                <!-- fb -->
+                                <button class="login-provider-button-circle" style="background-color: rgb(24,119,242);" onclick="location.href='/Login/fblogin'">
+                                    <img width="24" height="24" src="/pic/facebook_white.svg" class="rounded-circle" alt="...">
+                                </button>
+
+                            </div>
+                            <div class="">
+                                <!-- line -->
+                                <button class="login-provider-button-circle" style="background-color: rgb(0,195,0);" v-on:click="addLineLogin">
+                                    <img width="24" height="24" src="/pic/line_nobg.svg" class="rounded-circle" alt="...">
+                                </button>
+
+                            </div>
+                            <div class="">
+                                <!-- google -->
+                                <button class="login-provider-button-circle" style="background-color:white; border-color: gray;" onclick="location.href='/Login/googlelogin'">
+                                    <img width="24" height="24" src="/pic/google.svg" class="rounded-circle" alt="...">
+
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container" id="login1">
+                        <div class="mb-3">
+                            <b>TT會員帳號登入</b>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="電子郵件" v-model="loginInformation.account">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="密碼" v-model="loginInformation.password">
+                        </div>
+                        <div class="mb-3">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#resetcode">忘記密碼</a>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" v-on:click="submitLogin" class="btn btn-primary mb-3">登入</button>
+                        </div>
+                        <div class="mb-3" data-bs-toggle="modal" data-bs-target="#register">
+                            <a href="javascript:void(0);">還未加入TT嗎？立即註冊！</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 註冊-->
+    <div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">註冊</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="text-center fw-bold">使用社交平台帳戶登入</div>
+                        <div class="text-center">立即登入，隨時收到獨家優惠</div>
+
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="">
+                                <!-- fb -->
+                                <button class="login-provider-button-circle" style="background-color: rgb(24,119,242);" onclick="location.href='/fblogin'">
+                                    <img width="24" height="24" src="/pic/facebook_white.svg" class="rounded-circle" alt="...">
+                                </button>
+
+                            </div>
+                            <div class="">
+                                <!-- line -->
+                                <button class="login-provider-button-circle" style="background-color: rgb(0,195,0);">
+                                    <img width="24" height="24" src="/pic/line_nobg.svg" class="rounded-circle" alt="...">
+                                </button>
+
+                            </div>
+                            <div class="">
+                                <!-- google -->
+                                <button class="login-provider-button-circle" style="background-color:white; border-color: gray;" onclick="location.href='/googlelogin'">
+                                    <img width="24" height="24" src="/pic/google.svg" class="rounded-circle" alt="...">
+
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="mb-3">
+                            <b>免費註冊</b>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" onblur=isEmail(this.value) placeholder="電子郵件" v-model="registerInformation.account">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="密碼" v-model="registerInformation.password">
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                我已詳閱並同意<a href="#">使用者條款</a>&<a href="#">隱私權保護政策</a>
+                            </label>
+                        </div>
+                        @*<div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    我不是機器人
+                                </label>
+                            </div>*@
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary mb-3" v-on:click="addRegister">註冊</button>
+                        </div>
+                        <div class="mb-3">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#login">已成為會員？立即登入！</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 忘記密碼-->
+    <div class="modal fade" id="resetcode" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">忘記密碼</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="text-center fw-bold">使用社交平台帳戶登入</div>
+                        <div class="text-center">立即登入，隨時收到獨家優惠</div>
+
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="">
+                                <!-- fb -->
+                                <button class="login-provider-button-circle" style="background-color: rgb(24,119,242);" onclick="location.href='/Login/fblogin'">
+                                    <img width="24" height="24" src="/pic/facebook_white.svg" class="rounded-circle" alt="...">
+                                </button>
+
+                            </div>
+                            <div class="">
+                                <!-- line -->
+                                <button class="login-provider-button-circle" style="background-color: rgb(0,195,0);">
+                                    <img width="24" height="24" src="/pic/line_nobg.svg" class="rounded-circle" alt="...">
+                                </button>
+
+                            </div>
+                            <div class="">
+                                <!-- google -->
+                                <button class="login-provider-button-circle" style="background-color:white; border-color: gray;" onclick="location.href='/Login/googlelogin'">
+                                    <img width="24" height="24" src="/pic/google.svg" class="rounded-circle" alt="...">
+
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="mb-3">
+                            <input v-model="inputAccount" type="email" class="form-control" placeholder="電子郵件">
+                        </div>
+                        @*<div class="mb-3">
+                            <input v-model="memberPasswordUpdate.password" type="password" class="form-control" placeholder="請輸入新密碼">
+                        </div>*@
+                        <div class="d-grid gap-2">
+                            <button v-on:click="forgetpassword" class="btn btn-primary mb-3">重新設定密碼</button>
+                        </div>
+                        <div class="mb-3" data-bs-toggle="modal" data-bs-target="#register">
+                            <a href="javascript:void(0);">還未加入TT嗎？立即註冊！</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container-fluid g-0">
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer ">
+        <div class="container">
+            &copy; TaiwanTourist
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    @*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script> *@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<!--發註冊API-->
+<script>
+    var app = new Vue({
+        el: '#register',
+        data: {
+            registerInformation: {
+                account: "",
+                password: "",
+                roleName: "Member",
+                members: {
+
+                }
+            }
+        },
+        methods: {
+            addRegister: function () {
+                let self = this;
+                axios.post("/auth/register", self.registerInformation)
+                    .then(
+                        function (res) {
+                            if (res.status == 200) {
+                                localStorage.setItem('userExist', '123'); //註冊也要給
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: '恭喜註冊成功',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    willClose: (toast) => {
+                                        axios.post("/auth/login", self.registerInformation).then(function (res) { window.location.href = "/home/index"; }).catch();
+                                    }
+                                });
+                                //alert("恭喜註冊成功，請再次登入，並至您的信箱接收帳號激活驗證信");
+                                //axios.post("/auth/login", self.registerInformation).then(function (res) { window.location.href = "/home/index"; }).catch();
+
+                            };
+                        }
+                    )
+                    .catch(function (error) {
+                        if (error.status == 404) {
+                            alertWrong(error.data);
+                        }
+                        else if (error.status == 422) {
+                            for (var i of Object.keys(error.data.errors)) {
+                                alertWrong(error.data.errors[i][0]);
+                            }
+                        }
+                    });
+            }
+        }
+    })
+</script>
+
+<!--發登入API-->
+<script>
+    var app1 = new Vue({
+        el: "#login1",
+        data: {
+            loginInformation: {
+                account: "",
+                password: ""
+            }
+        },
+        methods: {
+            submitLogin: function () {
+                let self = this;
+                axios.post("/auth/login", self.loginInformation)
+                    .then(function (res) {
+                        if (res.status == 200) {
+                            localStorage.setItem('userExist', '123');
+                            //alert("登入成功");
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '登入成功',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    })
+                    .catch(function (err) {
+                        if (err.status == 404) {
+                            alertWrong(err.data);
+                        }
+                    });
+            },
+
+        }
+    })
+</script>
+
+<!--登出那一段-->
+<script>
+    var FUserLogin = new Vue({
+        el: "#offcanvasFUserLogin",
+        data: {
+            url:""
+        },
+        mounted: function () {
+            this.getUserPic();
+        },
+        methods: {
+            logout: function () {
+                axios.post("/auth/logout").then(function (res) {
+                    if (res.status == 200) {
+                        localStorage.removeItem("userExist");
+                        location.reload();
+
+                    }
+                });
+            },
+            getUserPic: function () {
+                let self = this;
+                axios.get("/auth/GetUserPic")
+                    .then(function (res) {
+                        self.url = res.data;
+                    })
+            }
+        }
+    })
+
+</script>
+
+<!--忘記密碼-->
+<script>
+    var forgetPassword = new Vue({
+        el: "#resetcode",
+        data: {
+            memberPasswordUpdate: {
+                account: "",
+                password: ""
+            },
+            inputAccount:""
+        },
+        methods: {
+            updatePassword: function () {
+                let self = this;
+                axios.put("/auth/reset", self.memberPasswordUpdate)
+                    .then(function (res) {
+                        if (res.status == 200) {
+                            localStorage.setItem('userExist', '123'); //註冊也要給
+                            //alertSuccess(res.data);
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: res.data,
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    axios.post("/auth/login", self.memberPasswordUpdate)
+                                        .then(function (res) { window.location.href = "/home/index"; })
+                                        .catch();
+                                }
+                            });
+                        }
+                    }).catch(function (res) {
+                        if (res.status == 404) {
+                            alertWrong(res.data);
+                        }
+                    })
+            },
+            forgetpassword: function () {
+                let self = this;
+                axios.post("/auth/forgetpassword?account=" + self.inputAccount)
+                    .then(
+                        function (res) {
+                            if (res.status == 200) {
+                                alertSuccess(res.data);
+                            }
+                        }
+                ).catch(
+                    function (err) {
+                        if (err.status == 404) {
+                            alertWrong(err.data);
+                        }
+                    }
+                )
+            }
+        }
+    })
+</script>
+
+<!--發購物車API-->
+<script>
+    var userExist = "@User.Identity.IsAuthenticated".toLowerCase() == "true";
+    var cartListVue = new Vue({
+        el: "#offcanvasShopCart",
+        data: {
+            cartList: [],
+            tempRemoveItem: "",
+        },
+        mounted:
+            function () {
+                let self = this;
+                axios.get("/api/Cart/GetFullInfoCart")
+                    .then(function (res) {
+                        if (res.data.length == 0) {
+                            self.cartList.splice(0);
+                        } else {
+                            self.cartList = res.data;
+                            //console.log(self.cartList);
+                        }
+                    })
+                    .catch(function (err) {
+                        if (err.status == 404) {
+                            //    alert(err.data);
+                            console.log(err.data);
+
+                        }
+                    });
+
+                this.getCurrentUserCart();
+
+            }
+        ,
+        computed: {
+            totalCount: function () {
+                return this.cartList.length;
+            }
+        },
+        methods: {
+            getCurrentUserCart: function () {
+                let self = this;
+                axios.get("/api/Cart/GetFullInfoCart")
+                    .then(function (res) {
+                        if (res.data.length == 0) {
+                            self.cartList.splice(0);
+                        } else {
+                            self.cartList = res.data;
+                            //    console.log(self.cartList);
+                        }
+                    })
+                    .catch(function (err) {
+                        if (err.status == 404) {
+                            //alert(err.data);
+                            console.log(err.data);
+                        }
+                    });
+            },
+            checkUserLogin: function () {
+                
+                if (userExist == false) {
+                    console.log("a");
+                    var myLogin1 = document.getElementsByName("mylogin");
+                    myLogin1[0].click();
+                } else {
+                    console.log("b");
+                    window.location.href = "/purchase/cart";
+                }
+            },
+            deleteCartItem: function (value) {
+                this.tempRemoveItem = value;
+            }
+        }
+    })
+</script>
+
+<!--刪除商品API-->
+<script>
+    var deleteCartItem = new Vue({
+        el: "#deleteProduct",
+        data: {
+            removeCartItemList: {
+                productId:""
+            },
+        },
+        methods: {
+            removeCartItem: function () {
+                let self = this;
+                self.removeCartItemList.productId = cartListVue.tempRemoveItem;
+                //console.log(self.removeCartItemList);
+                axios.post("/api/cart/removecart", self.removeCartItemList)
+                    .then(function (res) {
+                        if (res.status == 204) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '您已成功刪除商品',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                willClose: (toast) => {
+                                    cartListVue.getCurrentUserCart();
+                                    //window.location.href = "/home/index";
+
+                                }
+                            });
+                        }
+                    })
+            }
+        }
+    })
+</script>
+
+
+<script>
+    var useOauth = new Vue({
+        el: "#oauth",
+        data: {
+            oauth: []
+        },
+        methods: {
+            addLineLogin: function () {
+                var self = this;
+                axios.post("/Login/LineLogin")
+                    .then(
+                        function (res) {
+                            var url = res.data;
+                            window.location.href = url;
+                        }
+                    )
+            }
+        }
+    })
+</script>
+
+<script>
+    function alertSuccess(inp) {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: inp,
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    }
+
+    function alertWrong(inp) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: inp,
+        })
+    }
+</script>
+
+<script>
+    
+
+</script>
